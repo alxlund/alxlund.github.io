@@ -105,11 +105,10 @@ header {
 }
 
 /* CSS för galleriet */
-/* CSS för galleriet */
 .gallery {
   display: flex;
-  flex-wrap: wrap; /* Gör så att bilderna bryter till nästa rad */
-  gap: 20px; /* Mellanrummet mellan bilderna */
+  flex-wrap: wrap; /* Radbrytning när det behövs */
+  gap: 20px; /* Mellanrum mellan bilder horisontellt */
   padding: 20px; /* Utrymme runt hela galleriet */
   justify-content: center; /* Centrerar galleriet horisontellt */
   box-sizing: border-box; /* Inkludera padding i totalbredden */
@@ -117,13 +116,14 @@ header {
 
 .gallery-item {
   flex: 1 1 calc(33.33% - 40px); /* Tre kolumner med lika mycket utrymme, minus mellanrum */
-  margin-bottom: 20px; /* Vertikalt mellanrum mellan bilderna */
+  margin-bottom: 20px; /* Jämnt mellanrum mellan alla bilder vertikalt */
 }
 
 .gallery-item img {
   width: 100%; /* Fyll kolumnens bredd */
   height: auto; /* Behåll bildens proportioner */
-  display: block; /* Förhindra att bilderna överlappar */
+  display: block; /* Förhindra överlapp */
+  margin-bottom: 20px; /* Vertikalt mellanrum mellan bilder i kolumner */
 }
  
 .gallery img:hover {
