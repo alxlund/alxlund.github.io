@@ -107,22 +107,20 @@ header {
 /* CSS för galleriet */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Gör det responsivt med minst 300px per bild */
   gap: 20px; /* Mellanrummet mellan bilderna */
-  justify-content: space-between;
   padding: 20px; /* Utrymme runt hela galleriet */
 }
 
 .gallery img {
-  height: auto;
-  max-width: 100%; /* Gör så att bilderna aldrig överstiger förälderns bredd */
-  flex-grow: 1; /* Låt bilderna växa proportionellt */
-  object-fit: contain; /* Bilderna skalas men beskärs inte */
+  width: 100%; /* Fyll hela kolumnbredden */
+  height: auto; /* Behåll proportionerna */
+  aspect-ratio: 16/9; /* Sätter en standard proportion för bilderna */
+  object-fit: contain; /* Bilderna skalas utan beskärning */
 }
-
+  
 .gallery img:hover {
-  transform: scale(1.05);
+  transform: scale(1);
 }
 
 /* Biosektion */
