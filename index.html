@@ -104,19 +104,20 @@ header {
   margin-top: 10px;
 }
 
+/* CSS för galleriet */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Mellanrummet mellan bilderna */
+  justify-content: space-between;
+  padding: 20px; /* Utrymme runt hela galleriet */
 }
 
 .gallery img {
-  width: 100%;
   height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  max-width: 100%; /* Gör så att bilderna aldrig överstiger förälderns bredd */
+  flex-grow: 1; /* Låt bilderna växa proportionellt */
+  object-fit: contain; /* Bilderna skalas men beskärs inte */
 }
 
 .gallery img:hover {
