@@ -123,28 +123,91 @@ header {
   transform: scale(1.05);
 }
 
-.footer {
+/* Större biosektion */
+.about {
+  background-color: #f9f9f9;
+  padding: 50px 20px;
   text-align: center;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
 }
 
-.footer .bio-image {
-  width: 100px;
-  height: 100px;
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bio-image {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.bio-text {
+  max-width: 800px;
+  text-align: left;
+}
+
+.bio-text h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.bio-text p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.bio-text h3 {
+  font-size: 1.8em;
   margin-bottom: 10px;
 }
 
-.footer a {
-  color: #fff;
+.clients {
+  list-style: none;
+  padding: 0;
+}
+
+.clients li {
+  font-size: 1.2em;
+  margin: 5px 0;
+}
+
+/* Kontaktinfo */
+.contact-info {
+  margin-top: 40px;
+}
+
+.contact-info a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.socials a {
+  color: #333;
   text-decoration: none;
   margin: 0 10px;
 }
 
-.footer a:hover {
+.socials a:hover {
   text-decoration: underline;
+}
+
+/* Responsiv anpassning */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+  }
+
+  .bio-text {
+    text-align: center;
+  }
+
+  .clients li {
+    font-size: 1.1em;
+  }
 }
 
 /* Responsiv layout */
@@ -189,16 +252,33 @@ header {
     <!-- Lägg till fler bilder här -->
   </section>
 
- <!-- Footer med bio och sociala medier -->
-  <footer class="footer">
+<!-- Footer -->
+<footer id="about" class="about">
+  <div class="about-content">
     <img src="din-bild.jpg" alt="Ditt namn" class="bio-image">
+    <div class="bio-text">
+      <h2>About Me</h2>
+      <p>Jag är en erfaren animatör med passion för att skapa engagerande animationer som berättar historier. Genom åren har jag haft förmånen att arbeta med olika kunder och projekt som har utmanat och utvecklat mig som konstnär.</p>
+      <h3>Kunder jag har arbetat med:</h3>
+      <ul class="clients">
+        <li>Företag 1</li>
+        <li>Företag 2</li>
+        <li>Företag 3</li>
+        <li>Företag 4</li>
+        <li>Företag 5</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact-info">
     <p>Kontakt: <a href="mailto:din.email@example.com">din.email@example.com</a></p>
     <div class="socials">
       <a href="https://instagram.com">Instagram</a>
       <a href="https://linkedin.com">LinkedIn</a>
       <!-- Lägg till fler sociala medier här -->
     </div>
-  </footer>
+  </div>
+</footer>
 
   <script src="script.js"></script>
  
