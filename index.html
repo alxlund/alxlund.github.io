@@ -106,7 +106,8 @@ header {
 
 /* CSS för galleriet */
 .gallery {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
   gap: 20px; /* Mellanrummet mellan bilderna */
   justify-content: space-between;
