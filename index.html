@@ -108,14 +108,17 @@ header {
 /* CSS för galleriet */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tre jämna kolumner */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Gör kolumner responsiva */
   gap: 20px; /* Mellanrummet mellan bilderna */
   padding: 20px; /* Utrymme runt hela galleriet */
+  max-width: 100%; /* Se till att galleriet inte går utanför fönstrets bredd */
+  box-sizing: border-box; /* Inkludera padding i totalbredden */
 }
 
 .gallery-item img {
-  width: 100%; /* Gör så att bilden fyller hela kolumnens bredd */
-  height: auto; /* Bevara bildens proportioner */
+  width: 100%; /* Fyll kolumnens bredd */
+  height: auto; /* Behåll bildens proportioner */
+  object-fit: cover; /* Skala bilderna utan att förvrängas */
 }
   
 .gallery img:hover {
