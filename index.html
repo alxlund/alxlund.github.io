@@ -20,118 +20,187 @@ body {
 
 /* NAVIGATION */
 
-nav {
-  list-style-type:none;
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #FFF;
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+.navbar ul {
+  list-style: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color:white;
+  display: flex;
+  justify-content: center;
 }
 
-li {
-   display: inline;
-   float: right;
+.navbar ul li {
+  margin: 0 20px;
 }
 
-li a {
-  display: block;
+.navbar ul li a {
   color: black;
-  text-align: center;
-  padding: 16px 16px;
   text-decoration: none;
+  font-size: 1.2em;
+  transition: color 0.3s ease;
 }
 
-li a:hover {
-  color: hsl(50,30%,40%);
-} 
- 
- .logo {
-  width:300px;
+.navbar ul li a:hover {
+  color: #f0a500;
 }
 
-/* CONTENT */
-
-.brb {
-  padding:0px;
- padding-bottom: 50px;
-  margin:auto;
-  width:90%;
-  text-align:center;
-}
- 
- /* TYPOGRAPHY */
-
-
-h1, h2, p, li a{
-  text-align:center;
-}
- 
-h1 {
-   font-family: freight-display-pro, serif;
-   font-weight: 700;
-   font-size:60px;
+/* Justera för "Work" och "About" sektioner */
+#work, #about {
+  padding: 50px 20px;
+  text-align: center;
 }
 
-p {
-   font-family: "freight-sans-pro", sans-serif;
-   font-weight: 400;
-  font-size:22px; 
-  text-align:center;
+#about {
+  background-color: #FFF;
 }
 
-p a {
-   color:black;
-  font-weight: 600;
+#about h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
-p a:visited {
-   color:black;
-   font-weight: 700;
+#about p {
+  font-size: 1.2em;
+  max-width: 600px;
+  margin: 0 auto;
 }
- 
-li a {
-  font-weight:500;
-  letter-spacing:1px;
-  font-size:22px;
+
+/* Resten av galleriet och layouten följer tidigare stilar */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
- 
- @media screen and (max-width: 600px) {
 
-  .img {
-   width:150px;
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
 
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+#logo-animation {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.blurb {
+  font-size: 1.2em;
+  color: #333;
+  margin-top: 10px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+.footer .bio-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsiv layout */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: 1fr;
   }
+}
 
-  h1 {
-   font-size:50px;
-}
-  
-  p {
-   font-size:18px;
-}
 </style>
 </head>
 <body>
-  <!-- Navigation big screens-->
-<!--
-<nav>
-  <li class="logo"><a href="index.html">LOGO?</a><li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="reel.html">Animation Reel</a></li>
-  <li><a href="index.html">Work</a></li>
-</nav>-->
- <section class="brb">
-  <img src="https://github.com/alxlund/alxlund.github.io/blob/main/logo.gif?raw=true" alt="Logo" class="logo" />
-<h1>Hello!</h1>
-<p>I’m an animator and designer based in Jönköping, Sweden.<br>
-  I'm rebuilding this website at the moment — please check back in a bit. <br><br>
-  Write me at:
+  <!-- Navigation -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+ <header class="header">
+    <div id="logo-animation"></div> <!-- Här laddas din Rive-animation -->
+    <p class="blurb">I’m an animator and designer based in Jönköping, Sweden.<br>
+  I'm rebuilding this website at the moment — please check back in a bit.
+    Write me at:
  <br><a href=mailto:"alexandra.nilsson.lund@gmail.com">alexandra.nilsson.lund@gmail.com</a><br><br>
   You can also find me on:<br>
   <a href="https://www.instagram.com/alx.lund/">Instagram</a> | 
   <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">LinkedIn</a>
-  </p>
-</section> 
+    </p>
+  </header>
+
+ <section class="gallery">
+    <a href="https://behance.net/projekt1" target="_blank">
+      <img src="bild1.jpg" alt="Projekt 1">
+    </a>
+    <img src="bild2.gif" alt="Animation 2">
+    <img src="bild3.jpg" alt="Bild 3">
+    <a href="https://behance.net/projekt2" target="_blank">
+      <img src="bild4.jpg" alt="Projekt 2">
+    </a>
+    <!-- Lägg till fler bilder här -->
+  </section>
+
+ <!-- Footer med bio och sociala medier -->
+  <footer class="footer">
+    <img src="din-bild.jpg" alt="Ditt namn" class="bio-image">
+    <p>Kontakt: <a href="mailto:din.email@example.com">din.email@example.com</a></p>
+    <div class="socials">
+      <a href="https://instagram.com">Instagram</a>
+      <a href="https://linkedin.com">LinkedIn</a>
+      <!-- Lägg till fler sociala medier här -->
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
  
  </body>
  </html>
