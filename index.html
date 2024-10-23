@@ -105,24 +105,17 @@ header {
 }
 
 /* CSS för galleriet */
+/* CSS för galleriet */
 .gallery {
-  display: flex;
- flex-direction: column;
-  flex-wrap: nowrap;
- justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tre jämna kolumner */
   gap: 20px; /* Mellanrummet mellan bilderna */
   padding: 20px; /* Utrymme runt hela galleriet */
 }
 
-.gallery-item {
-  width: 200px; /* Sätter en fast höjd för bilderna */
-  display: flex; /* För att centera bilderna inuti sina containrar */
-}
-
 .gallery-item img {
-  width: 100%;
-  height: 100%; /* Fyll ut hela containerns höjd */
-  object-fit: cover; /* Gör så att bilderna anpassas och täcker ytan utan att förvrängas */
+  width: 100%; /* Gör så att bilden fyller hela kolumnens bredd */
+  height: auto; /* Bevara bildens proportioner */
 }
   
 .gallery img:hover {
