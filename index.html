@@ -76,10 +76,29 @@ nav a {
 .bio-text p {
   margin-bottom: 5px;
 }
-/* Responsiv layout */
-@media (max-width: 768px) {
+  
+/* Responsive-ness for different screen-sizes */
+@media screen and (max-width: 810px) {
   .gallery {
-    grid-template-columns: 1fr;
+    column-count: 3;
+    --webkit-column-count: 3;
+    --moz-column-count: 3;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .gallery {
+    column-count: 2;
+    --webkit-column-count: 2;
+    --moz-column-count: 2;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .gallery {
+    column-count: 1;
+    --webkit-column-count: 1;
+    --moz-column-count: 1;
   }
 }
 
@@ -93,7 +112,7 @@ nav a {
   </nav>
 
 <div class="container">
-  <div class="logo-animation"> <!-- Här laddas din Rive-animation -->
+  <div class="logo-animation"> <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo.gif">
     <p class="blurb">I’m an animator and designer based in Jönköping, Sweden.<br>
   I'm rebuilding this website at the moment — please check back in a bit.
     Write me at:
