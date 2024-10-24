@@ -34,16 +34,25 @@ nav a {
   font-weight: bold;
 }
 
-/* För galleriet */
+/* CSS för galleriet */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tre jämna kolumner */
-  gap: 20px; /* Mellanrum mellan bilder */
+  grid-template-columns: repeat(3, 1fr); /* Tre kolumner */
+  gap: 20px; /* Mellanrum både vertikalt och horisontellt */
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Bildstilar */
+.gallery-item {
+  overflow: hidden; /* Förhindra att bilder överflödar */
 }
 
 .gallery-item img {
-  width: 100%;
-  height: auto; /* Behåll bildens proportioner */
+  width: 100%; /* Gör alla bilder lika breda */
+  height: 100%; /* Justera höjden så att bilderna fyller ut sina celler */
+  object-fit: cover; /* Anpassa bilden så att den fyller hela cellen utan att förlora proportioner */
   display: block;
 }
 
@@ -105,7 +114,7 @@ nav a {
     </p>
   </div>
 
- <section id="work" class="gallery">
+ <div class="gallery">
   <div class="gallery-item">
     <a href="https://behance.net/projekt1" target="_blank">
       <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings.gif" alt="Stranger Things">
@@ -141,7 +150,7 @@ nav a {
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/foxes2.jpg" alt="Tend">
   </div>
     <!-- Lägg till fler bilder här -->
-  </section>
+  </div>
 
 <section id="about" class="bio">
     <div class="bio-content">
