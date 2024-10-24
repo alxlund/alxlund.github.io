@@ -37,10 +37,10 @@ nav a {
 
 /* CSS för galleriet */
 .gallery {
-  column-count: 4;
-  --webkit-column-count: 4;
-  --moz-column-count: 4;
-  gap: 4rem;
+  column-count: 3;
+  --webkit-column-count: 3;
+  --moz-column-count: 3;
+  gap: 1rem;
   padding: 1rem;
 }
 
@@ -83,26 +83,20 @@ nav a {
 /* Responsive-ness for different screen-sizes */
 @media screen and (max-width: 810px) {
   .gallery {
-    column-count: 3;
-    --webkit-column-count: 3;
-    --moz-column-count: 3;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .gallery {
     column-count: 2;
     --webkit-column-count: 2;
     --moz-column-count: 2;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .gallery {
     column-count: 1;
     --webkit-column-count: 1;
     --moz-column-count: 1;
   }
+}
+
 }
 
 </style>
