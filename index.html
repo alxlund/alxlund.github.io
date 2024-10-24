@@ -11,30 +11,67 @@ I love to draw and animate colourful characters!">
  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Mulish:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
  <style>
- /* För hela layouten */
+/* Google Fonts */
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Mulish:wght@200;300;400;500;600;700&" rel="stylesheet">
+
+/* Adobe fonts */
+<link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
+
+/* För hela layouten */
 .container {
   margin: 0 auto;
+}
+
+p {
   font-family: freight-sans-pro, Inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 200;
+  color: #192130;
+}
+
+h1 {
+  font-family: freight-sans-pro, sans-serif;
+  font-style: normal;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #192130;
+}
+
+p a {
+  color: #1F4DB2;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .logo-animation {
  text-align: center;
-
+ background-color: #F2F2F2;
+ padding-bottom: 50px;
 }
 
+/* Navigationen */
 nav {
-  position: sticky;
-  display: flex;
-  overflow: hidden;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  display: flex; /* Flexbox för att hantera placering av länkar */
+  justify-content: center; /* Centrerar länkarna horisontellt */
+  align-items: center; /* Vertikal centrering av innehållet (om det behövs) */
+  background-color: white; /* Gör bakgrunden vit */
+  padding: 10px 0; /* Lägger till lite utrymme ovanför och under länkarna */
+  position: sticky; /* Gör att navigationen stannar kvar när man scrollar */
+  top: 0; /* Fäster navigationen i toppen av fönstret */
+  z-index: 100; /* Gör så att navigationen ligger ovanför annat innehåll */
+  font-family: freight-sans-pro, Inter, sans-serif;
+  text-transform: uppercase;
 }
 
 nav a {
-  text-decoration: none;
-  color: #000;
-  font-weight: bold;
+  text-decoration: none; /* Ta bort understrykning på länkar */
+  color: black; /* Länktextens färg */
+  margin: 0 15px; /* Mellanrum mellan länkarna */
+  font-weight: bold; /* Gör texten fet */
+}
+
+nav a:hover {
+  color: #007BFF; /* Ändra färgen på länkarna när man hovrar över dem */
 }
 
 /* CSS för galleriet */
@@ -44,18 +81,27 @@ nav a {
   --moz-column-count: 3;
   gap: 1rem;
   padding: 1rem;
+  background-color: #FFF;
 }
 
-.gallery-item img {
+.gallery-item img,
+.gallery-item video {
   height: auto;
   width: 100%;
+  padding-bottom: 1rem;
 }
+
   
 /* För biosektionen */
 .bio {
   display: flex;
-  gap: 20px;
-  align-items: center; /* Justera innehållets vertikala position */
+  gap: 0px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF;
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .bio-content {
@@ -73,14 +119,27 @@ nav a {
   max-width: 600px;
 }
 
-.bio-text h2 {
-  margin-bottom: 10px;
+.contact {
+  display: flex;
+  gap: 20px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #F2F2F2;
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
-.bio-text p {
-  margin-bottom: 5px;
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+    padding: 0;
+    color: #F2F2F2;
 }
-  
+
 /* Responsive-ness for different screen-sizes */
 @media screen and (max-width: 810px) {
   .gallery {
@@ -100,28 +159,26 @@ nav a {
 
 }
 
+
 </style>
 </head>
 <body>
   <!-- Navigation -->
 <nav>
     <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
     <a href="#about">About</a>
   </nav>
 
 <div class="container">
   <div class="logo-animation"> <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo.gif">
-    <p class="blurb">I’m an animator and designer based in Jönköping, Sweden.<br>
+    <h1>Hello!</h1>
+    <p>I’m an animator and designer based in Jönköping, Sweden.<br>
   I'm rebuilding this website at the moment — please check back in a bit.
-    Write me at:
- <br><a href=mailto:"alexandra.nilsson.lund@gmail.com">alexandra.nilsson.lund@gmail.com</a><br><br>
-  You can also find me on:<br>
-  <a href="https://www.instagram.com/alx.lund/">Instagram</a> | 
-  <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">LinkedIn</a>
     </p>
   </div>
 
- <div class="gallery">
+ <section id="work" class="gallery">
   <div class="gallery-item">
     <a href="https://behance.net/projekt1" target="_blank">
       <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings.gif" alt="Stranger Things">
@@ -157,27 +214,32 @@ nav a {
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/foxes2.jpg" alt="Tend">
   </div>
     <!-- Lägg till fler bilder här -->
-  </div>
+  </section>
+  
+  <section id="contact" class="contact">
+  <p>
+  I like e-mails! Write me at:
+ <br><a href=mailto:"alexandra.nilsson.lund@gmail.com">alexandra.nilsson.lund@gmail.com</a><br><br>
+  You can also find me on:<br>
+  <a href="https://www.instagram.com/alx.lund/">Instagram</a> | 
+  <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">LinkedIn</a> |
+  <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">Behance</a></p>
+  </section>
 
 <section id="about" class="bio">
     <div class="bio-content">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Me.jpg" alt="Alexandra Lund" class="bio-image">
     <div class="bio-text">
-      <p>
-After working with design and photography for a few years I studied Motion Design at Hyper Island.
-This led me to an internship at Animade, where I ended up working for almost three years, designing and animating for a range of clients and quite a few personal projects.<br><br>
-After moving back home to Sweden I’ve been lucky to work with more of my favourite studios such as Buck, Nexus and Oddfellows. Clients I've worked with include Google, Apple, Meta and Amazon.<br>
-I really enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Sweden.<br><br>
-If you want to know more you can watch <a href="https://www.youtube.com/watch?v=Xnqg6F89TmA" target="_blank">Adobe Live</a> where I animate some walkcycles, or read an <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank">interview with WeTransfer</a> about my personal project Words and Pals.<br><br>
-I also like e-mails, write me at:
- <br><a href=mailto:"alexandra.nilsson.lund@gmail.com">alexandra.nilsson.lund@gmail.com</a><br><br>
-  You can also find me on:<br>
-  <a href="https://www.instagram.com/alx.lund/">Instagram</a> | 
-  <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">LinkedIn</a>
+      
+      <h1>A bit more about me</h1>
+<p>I started off as an intern at Animade in London where I continued working for a few years before moving back to the forest in Småland, Sweden.<br><br>
+Since then I've been freelancing and have been lucky to work with more of my favourite studios such as Buck, Nexus and Oddfellows. <br>Clients I've worked with include Google, Apple, Meta and Amazon.<br>
+I enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Sweden.<br><br>
+I do all kinds of 2D animation work – I work mainly in AfterEffects but anything goes. You can also hire me as a Designer, Illustrator or Animation Lead.<br><br>
+If you want to know more you can watch me animate some walkcycles at <a href="https://www.youtube.com/watch?v=Xnqg6F89TmA" target="_blank">Adobe Live</a>, or read an <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank">interview with WeTransfer</a> about my personal project Words and Pals.
       </p>
      </div>
-    </div>
-  </section>
+      </section>
 </div>
 
   <script src="script.js"></script>
