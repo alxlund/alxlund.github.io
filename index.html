@@ -36,26 +36,18 @@ nav a {
 
 /* CSS för galleriet */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tre kolumner */
-  gap: 20px; /* Mellanrum både vertikalt och horisontellt */
-  padding: 20px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-/* Bildstilar */
-.gallery-item {
-  overflow: hidden; /* Förhindra att bilder överflödar */
+  column-count: 4;
+  --webkit-column-count: 4;
+  --moz-column-count: 4;
+  gap: 1rem;
+  padding: 4rem;
 }
 
 .gallery-item img {
-  width: 100%; /* Gör alla bilder lika breda */
-  height: 100%; /* Justera höjden så att bilderna fyller ut sina celler */
-  object-fit: cover; /* Anpassa bilden så att den fyller hela cellen utan att förlora proportioner */
-  display: block;
+  height: auto;
+  width: 100%;
 }
-
+  
 /* För biosektionen */
 .bio {
   display: flex;
