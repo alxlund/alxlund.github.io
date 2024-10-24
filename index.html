@@ -108,16 +108,22 @@ header {
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Tre jämna kolumner */
-  gap: 20px; /* Mellanrum mellan bilderna */
+  grid-auto-rows: 10px; /* Basräkningsenhet för höjd på varje rad */
+  gap: 20px; /* Mellanrum mellan alla bilder */
   padding: 20px;
   max-width: 100%;
   box-sizing: border-box;
 }
 
+.gallery-item {
+  display: block;
+}
+
 .gallery-item img {
-  width: 100%; /* Gör alla bilder lika breda */
-  height: auto; /* Låter höjden variera beroende på bildens proportioner */
-  display: block; /* Förhindrar att bilder överlappar */
+  width: 100%; /* Fyll kolumnens bredd */
+  height: auto; /* Behåll bildens proportioner */
+  display: block; /* Se till att bilden inte överlappar */
+  grid-row-end: span 20; /* Anpassa antalet rader per bild beroende på storlek */
 }
  
 .gallery img:hover {
