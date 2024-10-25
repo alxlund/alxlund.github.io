@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
 
   <style>
-    * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -198,22 +198,22 @@ hr {
 }
 
 }
+
 </style>
 </head>
-
 <body>
   <!-- Navigation -->
-  <nav>
+<nav>
     <a href="#work">Work</a>
     <a href="#contact">Contact</a>
     <a href="#about">About</a>
   </nav>
 
-<div class="container">
-  <div class="logo-animation">
-    <div id="rive-logo" style="width: 300px; height: 300px;"></div>
-    <h1>Hello!</h1>
-    <h2>I'm a designer and animator based in Jönköping, Sweden. <br>I enjoy a clean and playful aestetic and often work with characters, motion graphics and branding.<br>2D and web is my thing ヽ(•‿•)ノ<br>
+ <div class="container">
+    <div class="logo-animation">
+      <canvas id="canvas" width="150" height="150"></canvas>
+      <h1>Hello!</h1>
+    <h2>I'm a designer and animator based in Jönköping, Sweden. <br>I enjoy a clean and playful aestetic and often work with characters,<br>motion graphics and branding.ヽ(•‿•)ノ<br>
   </div>
 
  <section id="work" class="gallery">
@@ -278,23 +278,22 @@ I enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Swe
 I do all kinds of 2D animation work and I work mainly in the Adobe Suite. You can also hire me as a Designer, Illustrator or Animation Lead.<br><br>
 If you want to know more you can watch me animate some walkcycles at <a href="https://www.youtube.com/watch?v=Xnqg6F89TmA" target="_blank">Adobe Live</a>, or read an <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank">interview with WeTransfer</a> about my personal project Words and Pals.
       </p>
-     </div>
-      </section>
-</div>
+    </div>
+      </div>
+    </section>
   </div>
-  
-<script src="https://unpkg.com/@rive-app/canvas@2.9.1"></script>
    
-   <script>
-    const r = new rive.Rive({
-        src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo.riv",
-        canvas: document.getElementById("rive-logo"),
+       <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+    <script>
+      const r = new rive.Rive({
+        src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/logo2.riv",
+        canvas: document.getElementById("canvas"),
         autoplay: true,
         onLoad: () => {
           r.resizeDrawingSurfaceToCanvas();
         },
-    });
-</script>
+      });
+    </script>
 </body>
 
 </html>
