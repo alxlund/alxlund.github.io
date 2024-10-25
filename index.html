@@ -11,11 +11,27 @@ I love to draw and animate colourful characters!">
  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Mulish:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Google Fonts */
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Mulish:wght@200;300;400;500;600;700&" rel="stylesheet">
 
 /* Adobe fonts */
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
+
+
+/* Rive Logo */
+#rive-logo {
+  width: 100%;
+  max-width: 300px; /* Gör den max 300px bred */
+  height: auto;
+  margin: 0 auto; /* Centrerar loggan */
+  background-color: #F3F4F5;
+}
 
 /* För hela layouten */
 .container {
@@ -29,49 +45,62 @@ p {
   color: #192130;
 }
 
-h1 {
-  font-family: freight-sans-pro, sans-serif;
-  font-style: normal;
-  font-size: 1.2rem;
-  text-transform: uppercase;
+h2 {
+  font-family: freight-sans-pro, Inter, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 200;
   color: #192130;
 }
 
-p a {
-  color: #1F4DB2;
+h1 {
+  font-family: freight-display-pro, serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #BF4F36;
+  line-height: 3.5rem;
+}
+
+p a,
+h2 a {
+  color: #193073;
   font-weight: 600;
   text-decoration: none;
 }
 
+p a:hover,
+h2 a:hover {
+  color: #BF4F36;
+}
+
 .logo-animation {
  text-align: center;
- background-color: #F2F2F2;
+ background-color: #F2F1E9;
  padding-bottom: 50px;
 }
 
 /* Navigationen */
 nav {
-  display: flex; /* Flexbox för att hantera placering av länkar */
-  justify-content: center; /* Centrerar länkarna horisontellt */
-  align-items: center; /* Vertikal centrering av innehållet (om det behövs) */
-  background-color: white; /* Gör bakgrunden vit */
-  padding: 10px 0; /* Lägger till lite utrymme ovanför och under länkarna */
-  position: sticky; /* Gör att navigationen stannar kvar när man scrollar */
-  top: 0; /* Fäster navigationen i toppen av fönstret */
-  z-index: 100; /* Gör så att navigationen ligger ovanför annat innehåll */
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  background-color: #E7DFD1;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   font-family: freight-sans-pro, Inter, sans-serif;
   text-transform: uppercase;
 }
 
 nav a {
-  text-decoration: none; /* Ta bort understrykning på länkar */
-  color: black; /* Länktextens färg */
-  margin: 0 15px; /* Mellanrum mellan länkarna */
-  font-weight: bold; /* Gör texten fet */
+  text-decoration: none;
+  color: #193073;
+  margin: 0 15px;
+  font-weight: bold;
 }
 
 nav a:hover {
-  color: #007BFF; /* Ändra färgen på länkarna när man hovrar över dem */
+  color: #BF4F36;
 }
 
 /* CSS för galleriet */
@@ -81,7 +110,7 @@ nav a:hover {
   --moz-column-count: 3;
   gap: 1rem;
   padding: 1rem;
-  background-color: #FFF;
+  background-color: white;
 }
 
 .gallery-item img,
@@ -99,7 +128,7 @@ nav a:hover {
   margin: 0 auto;
   align-items: center;
   justify-content: center;
-  background-color: #FFF;
+  background-color: #E7DFD1;
   padding-bottom: 50px;
   padding-top: 50px;
 }
@@ -111,8 +140,8 @@ nav a:hover {
 }
 
 .bio img {
-  width: 300px;
-  height: auto;
+  width: 400px;
+  height: 400px;
 }
 
 .bio-text {
@@ -126,7 +155,7 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: #F2F2F2;
+  background-color: #F2F1E9;
   padding-bottom: 50px;
   padding-top: 50px;
 }
@@ -141,27 +170,37 @@ hr {
 }
 
 /* Responsive-ness for different screen-sizes */
-@media screen and (max-width: 810px) {
-  .gallery {
-    column-count: 2;
-    --webkit-column-count: 2;
-    --moz-column-count: 2;
-  }
-}
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .gallery {
     column-count: 1;
     --webkit-column-count: 1;
     --moz-column-count: 1;
   }
+  .bio-content {
+    flex-direction: column; /* Lägg texten under bilden */
+    align-items: center; /* Centrera texten och bilden */
+    text-align: center; /* Justera textcentrering */
+  }
+
+  .bio-text {
+    text-align: center; /* Centrera texten på mindre skärmar */
+    max-width: 100%; /* Låt texten ta full bredd */
+  }
+  
+  .bio img {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 }
+
 
 
 </style>
 </head>
+<body>
 <body>
   <!-- Navigation -->
 <nav>
@@ -171,28 +210,30 @@ hr {
   </nav>
 
 <div class="container">
-  <div class="logo-animation"> <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo.gif">
+  <div class="logo-animation">
+    <div id="rive-logo" style="width: 300px; height: 300px;"></div>
     <h1>Hello!</h1>
-    <p>I’m an animator and designer based in Jönköping, Sweden.<br>
-  I'm rebuilding this website at the moment — please check back in a bit.
-    </p>
+    <h2>I'm a designer and animator based in Jönköping, Sweden. <br>I enjoy a clean and playful aestetic and often work with characters, motion graphics and branding.<br>2D and web friendly is my thing ヽ(•‿•)ノ<br>
   </div>
 
  <section id="work" class="gallery">
   <div class="gallery-item">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_3.gif" alt="Dog">
+  </div>
+   <div class="gallery-item">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/summergirl.jpg" alt="Summer Girl">
+  </div>
+     <div class="gallery-item">
     <a href="https://behance.net/projekt1" target="_blank">
       <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings.gif" alt="Stranger Things">
     </a></div>
-  <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_3.gif" alt="Dog">
+   <div class="gallery-item">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/SummerSolstice.gif" alt="Summer Solstice">
   </div>
-  <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/summergirl.jpg" alt="Summer Girl">
-  </div>
-  <div class="gallery-item">
+   <div class="gallery-item">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/leaf2.gif" alt="Leaf People">
   </div>
-  <div class="gallery-item">
+   <div class="gallery-item">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/preggo.gif" alt="Preggo Girl">
   </div>
   <div class="gallery-item">
@@ -202,46 +243,59 @@ hr {
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/scarf.gif" alt="Scarf">
   </div>
   <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/tilt.gif" alt="Tilt">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Aeroplane_2.gif" alt="Aeroplane">
   </div>
-  <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Aeroplane_Dribbble-3.gif" alt="Aeroplane">
-  </div>
-  <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Power3.gif" alt="Power">
+   <div class="gallery-item">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/RisoCouple.gif" alt="Riso Couple">
   </div>
   <div class="gallery-item">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/foxes2.jpg" alt="Tend">
+  </div>
+   <div class="gallery-item">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/fruitnveg.jpg" alt="Fruit n Veg">
   </div>
     <!-- Lägg till fler bilder här -->
   </section>
   
   <section id="contact" class="contact">
-  <p>
+  <h2>
   I like e-mails! Write me at:
  <br><a href=mailto:"alexandra.nilsson.lund@gmail.com">alexandra.nilsson.lund@gmail.com</a><br><br>
   You can also find me on:<br>
   <a href="https://www.instagram.com/alx.lund/">Instagram</a> | 
   <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">LinkedIn</a> |
-  <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">Behance</a></p>
+  <a href="https://www.linkedin.com/in/alexandra-lund-17620229/">Behance</a></h2>
   </section>
 
 <section id="about" class="bio">
     <div class="bio-content">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Me.jpg" alt="Alexandra Lund" class="bio-image">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/PenWalk.gif" alt="Alexandra Lund" class="bio-image">
     <div class="bio-text">
-      
-      <h1>A bit more about me</h1>
-<p>I started off as an intern at Animade in London where I continued working for a few years before moving back to the forest in Småland, Sweden.<br><br>
-Since then I've been freelancing and have been lucky to work with more of my favourite studios such as Buck, Nexus and Oddfellows. <br>Clients I've worked with include Google, Apple, Meta and Amazon.<br>
+      <h1>A bit about me</h1>
+      <p>I started off as an intern at <b>Animade</b> in London where I continued working for a few years before moving back to Sweden.<br><br>
+Since then I've been freelancing and have been lucky to work with more of my favourite studios such as <b>Buck</b>, <b>Nexus</b> and <b>Oddfellows</b>. <br>Clients I've worked with include <b>Google</b>, <b>Apple</b>, <b>Meta</b> and <b>CNN</b>.<br>
 I enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Sweden.<br><br>
-I do all kinds of 2D animation work – I work mainly in AfterEffects but anything goes. You can also hire me as a Designer, Illustrator or Animation Lead.<br><br>
+I do all kinds of 2D animation work and I work mainly in the Adobe Suite. You can also hire me as a Designer, Illustrator or Animation Lead.<br><br>
 If you want to know more you can watch me animate some walkcycles at <a href="https://www.youtube.com/watch?v=Xnqg6F89TmA" target="_blank">Adobe Live</a>, or read an <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank">interview with WeTransfer</a> about my personal project Words and Pals.
       </p>
      </div>
       </section>
 </div>
-
+  
+  
+  <script src="https://unpkg.com/@rive-app/canvas@1.0.83"></script>
+  
+  <script> document.addEventListener("DOMContentLoaded", function() {
+      const rive = new Rive({
+        src: 'https://din-url-till-rive-filen.riv', // Länka till din Rive-fil
+        canvas: document.getElementById('rive-logo'),
+        autoplay: true,
+        stateMachines: 'State Machine 1', // Anpassa till ditt projekt om nödvändigt
+        fit: Rive.Fit.COVER
+      });
+    });
+  </script>
+  </body>
   <script src="script.js"></script>
  
  </body>
