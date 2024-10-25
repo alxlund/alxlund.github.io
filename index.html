@@ -30,7 +30,6 @@ I love to draw and animate colourful characters!">
   max-width: 300px; /* Gör den max 300px bred */
   height: auto;
   margin: 0 auto; /* Centrerar loggan */
-  background-color: #F3F4F5;
 }
 
 /* För hela layouten */
@@ -201,8 +200,6 @@ hr {
 </style>
 </head>
 <body>
-<body>
-<body>
   <!-- Navigation -->
 <nav>
     <a href="#work">Work</a>
@@ -286,18 +283,16 @@ If you want to know more you can watch me animate some walkcycles at <a href="ht
   
   <script src="https://unpkg.com/@rive-app/canvas@1.0.83"></script>
   
-  <script> document.addEventListener("DOMContentLoaded", function() {
-      const rive = new Rive({
-        src: 'https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo.riv', // Länka till din Rive-fil
-        canvas: document.getElementById('rive-logo'),
-        autoplay: true,
-        stateMachines: 'State Machine 1', // Anpassa till ditt projekt om nödvändigt
-        fit: Rive.Fit.COVER
-      });
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const rive = new Rive({
+      src: 'https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo.riv', // Link to your .riv file
+      canvas: document.getElementById('rive-logo'),
+      autoplay: true,          // This should automatically loop if the animation is set to loop in Rive
+      fit: Rive.Fit.COVER
     });
-  </script>
-  </body>
-  </body>
+  });
+</script>
   <script src="script.js"></script>
  
  </body>
