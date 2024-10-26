@@ -28,10 +28,10 @@
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
 
 
-/* Rive Logo 
+/* Rive Logo */
 #canvas {
-  width: 120px;
-}*/
+  margin: 0 auto;
+}
 
 /* För hela layouten */
 .container {
@@ -115,17 +115,85 @@ nav a:hover {
   column-count: 3;
   --webkit-column-count: 3;
   --moz-column-count: 3;
-  gap: 1rem;
+  gap: 1rem; /* Controls space between items horizontally */
   padding: 1rem;
-  background-color: white;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem; /* Adds vertical space between rows */
 }
 
 .gallery-item img,
 .gallery-item video {
   height: auto;
   width: 100%;
-  padding-bottom: 1rem;
+  display: block; /* Removes any extra whitespace */
+  transition: opacity 0.3s ease;
 }
+
+/* New overlay for solid color on hover */
+.gallery-item::after {
+  content: ""; /* Empty content for the overlay */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #D9B573; /* Solid color */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Show overlay on hover */
+.gallery-item:hover::after {
+  opacity: 1; /* Fully visible on hover */
+}
+
+/* Text overlay styling for the main caption */
+.gallery-item::before {
+  content: attr(data-caption); /* Use the data-caption attribute as content */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the text */
+  color: #BF4F36;
+  font-family: freight-display-pro, serif;
+  font-size: 3rem; /* Increased font size for visibility */
+  font-weight: 700;
+  text-align: center;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Ensure pointer events do not interfere with hover */
+  z-index: 1; /* Set z-index to bring text above the color overlay */
+}
+
+.gallery-item:hover::before {
+  opacity: 1; /* Fully visible on hover */
+}
+
+/* New link text overlay styling */
+.gallery-item[data-link] .link-text {
+  position: absolute;
+  bottom: 20px; /* Position at the bottom */
+  left: 50%;
+  transform: translate(-50%, -100%); /* Center horizontally */
+  color: #193073; /* Link text color */
+  font-family: freight-sans-pro, Inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+  text-align: center; /* Center text */
+  z-index: 1; /* Ensure it appears above the overlay */
+}
+
+/* Show the link text on hover */
+.gallery-item[data-link]:hover .link-text {
+  opacity: 1; /* Fully visible on hover */
+}
+
 
   
 /* För biosektionen */
@@ -211,9 +279,11 @@ hr {
 
 }
 
+
 </style>
 </head>
-<body>
+  
+  <body>
   <!-- Navigation -->
 <nav>
     <a href="#work">Work</a>
@@ -229,42 +299,42 @@ hr {
   </div>
 
  <section id="work" class="gallery">
-  <div class="gallery-item">
+  <div class="gallery-item" data-caption="Words & Pals" data-link="true"><a href="https://behance.net/projekt1" target="_new">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_3.gif" alt="Dog">
   </div>
-   <div class="gallery-item">
+   <div class="gallery-item" data-caption="Illustrations" data-link="true">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/summergirl.jpg" alt="Summer Girl">
   </div>
-     <div class="gallery-item">
-    <a href="https://behance.net/projekt1" target="_blank">
+     <div class="gallery-item" data-caption="Stranger Things" data-link="true">
+    <a href="https://behance.net/projekt1" target="_new">
       <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings.gif" alt="Stranger Things">
     </a></div>
-   <div class="gallery-item">
+   <div class="gallery-item" data-caption="Summer Solstice" data-link="true">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/SummerSolstice.gif" alt="Summer Solstice">
   </div>
-   <div class="gallery-item">
+   <div class="gallery-item" data-caption="Gifs" data-link="true">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/leaf2.gif" alt="Leaf People">
   </div>
-   <div class="gallery-item">
+   <div class="gallery-item" data-caption="Gifs" data-link="true">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/preggo.gif" alt="Preggo Girl">
   </div>
-  <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/powerofcharacter.jpg" alt="Power of Character">
+  <div class="gallery-item" data-caption="Illustrations" data-link="true">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/powerofcharacter.jpg" data-caption="Power of Character">
   </div>
-  <div class="gallery-item">
+  <div class="gallery-item" data-caption="Gifs" data-link="true">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/scarf.gif" alt="Scarf">
   </div>
-  <div class="gallery-item">
+  <div class="gallery-item" data-caption="Aeroplane" data-link="true"><a href="https://behance.net/projekt1" target="_new">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Aeroplane_2.gif" alt="Aeroplane">
   </div>
-   <div class="gallery-item">
+   <div class="gallery-item" data-caption="Gifs" data-link="true">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/RisoCouple.gif" alt="Riso Couple">
   </div>
-  <div class="gallery-item">
+  <div class="gallery-item" data-caption="Illustrations">
     <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/foxes2.jpg" alt="Tend">
   </div>
-   <div class="gallery-item">
-    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/fruitnveg.jpg" alt="Fruit n Veg">
+   <div class="gallery-item" data-caption="Illustrations" data-link="true">
+    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/fruitnveg.jpg" alt="Fruit & Veg">
   </div>
     <!-- Lägg till fler bilder här -->
   </section>
