@@ -28,13 +28,10 @@
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
 
 
-/* Rive Logo */
-#rive-logo {
-  width: 100%;
-  max-width: 300px; /* Gör den max 300px bred */
-  height: auto;
-  margin: 0 auto; /* Centrerar loggan */
-}
+/* Rive Logo 
+#canvas {
+  width: 120px;
+}*/
 
 /* För hela layouten */
 .container {
@@ -79,7 +76,9 @@ h2 a:hover {
  text-align: center;
  background-color: #F2F1E9;
  padding-bottom: 90px;
- padding-top: 40px;
+ padding-top: 20px;
+ padding-left: 20px;
+ padding-right: 20px;
 }
 
 /* Navigationen */
@@ -133,8 +132,10 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   background-color: #E7DFD1;
-  padding-bottom: 50px;
   padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .bio-content {
@@ -160,8 +161,7 @@ nav a:hover {
   justify-content: center;
   text-align: center;
   background-color: #F2F1E9;
-  padding-bottom: 50px;
-  padding-top: 50px;
+  padding: 50px;
 }
 
 hr {
@@ -181,6 +181,13 @@ hr {
     --webkit-column-count: 1;
     --moz-column-count: 1;
   }
+  
+  .bio {
+  padding-top: 0px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
   .bio-content {
     flex-direction: column; /* Lägg texten under bilden */
     align-items: center; /* Centrera texten och bilden */
@@ -202,7 +209,6 @@ hr {
 
 </style>
 </head>
-<body>
 <body>
   <!-- Navigation -->
 <nav>
