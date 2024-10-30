@@ -29,10 +29,6 @@
 /* Adobe fonts */
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css");
 
-/* Rive Logo */
-#canvasA {
-  margin: 0 auto;
-}
 
 /* För hela layouten */
 .container {
@@ -77,15 +73,6 @@ h2 a:hover {
   color: #BF4F36;
 }
 
-.intro {
-  text-align: center;
-  background-color: #F2F1E9;
-  padding-bottom: 90px;
-  padding-top: 20px;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
 /* Navigationen */
 nav {
   display: flex;
@@ -110,6 +97,50 @@ nav a {
 nav a:hover {
   color: #BF4F36;
 }
+
+.intro {
+  text-align: center;
+  background-color: #F2F1E9;
+  padding-bottom: 90px;
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-animation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#canvasA {
+  width: 100%;
+  height: auto;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+}
+
+#canvasB {
+  padding-left:8px;
+}
+
+#canvasB, #canvasC {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.intro-text {
+  text-align: center;
+  max-width: 600px;
+}
+
 
 /* CSS för galleriet */
 .gallery {
@@ -306,9 +337,6 @@ nav a:hover {
   }
 }
 
-
-
-
 </style>
 </head>
   <body>
@@ -322,10 +350,18 @@ nav a:hover {
 
   <div class="container">
     <div class="intro">
-      <canvas id="canvasA" width="100" height="100"></canvas>
-      <h1>Hello!</h1>
-      <h2>I'm a designer and animator based in Jönköping, Sweden. <br>I like clean and playful aesthetics and often work with characters,<br>motion graphics and branding.<br>
+  <div class="logo-animation">
+    <canvas id="canvasA" width="60" height="100"></canvas>
+    <div class="right-column">
+      <canvas id="canvasB" width="100" height="160"></canvas>
+      <canvas id="canvasC" width="100" height="45"></canvas>
     </div>
+  </div>
+  <div class="intro-text">
+    <h1>Hello!</h1>
+    <h2>I'm a designer and animator based in Jönköping, Sweden.<br>I like clean and playful aesthetics and often work with characters,<br>motion graphics and branding.</h2>
+  </div>
+</div>
 
 <section id="work" class="gallery">
   
@@ -459,40 +495,67 @@ nav a:hover {
     </section>
   </div>
 
-  <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
-  <script>
-const canvasA = document.getElementById('canvasA'); // Canvas for the letter "A"
+<script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+<script>
+// Canvas and Rive setup for A, B, and C
+const canvasA = document.getElementById('canvasA');
+const canvasB = document.getElementById('canvasB');
+const canvasC = document.getElementById('canvasC');
 
-let aTriggerInput; // Declare the variable for the trigger input
+let aTriggerInput, bTriggerInput, cTriggerInput;
 
+// Rive setup for canvasA
 const riveA = new rive.Rive({
-    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/A_4.riv", // Ensure this is the correct path
+    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/A_4.riv",
     canvas: canvasA,
     artboard: 'A',
-    stateMachines: ['aStateMachine'], // Name of the state machine
-    autoplay: true, // Start the jiggle animation automatically
+    stateMachines: ['aStateMachine'],
+    autoplay: true,
     onLoad: () => {
-        // Find the trigger input in the state machine
         aTriggerInput = riveA.stateMachineInputs('aStateMachine').find(input => input.name === 'aTrigger');
-        riveA.play('aJiggle'); // Start the looping animation initially
+        riveA.play('aJiggle');
     }
 });
 
-// Event listener to trigger the jump action on hover
-canvasA.addEventListener('mouseenter', () => {
-    console.log('Mouse entered canvas'); // Confirm event firing
-    if (aTriggerInput) {
-        aTriggerInput.fire(); // Fire the 'aTrigger' input to activate the aAction animation
-    } else {
-        console.error('Trigger input not found'); // Log if trigger input is missing
+canvasA.addEventListener('click', () => {
+    if (aTriggerInput) aTriggerInput.fire();
+});
+
+// Rive setup for canvasB
+const riveB = new rive.Rive({
+    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/B.riv",
+    canvas: canvasB,
+    artboard: 'B',
+    stateMachines: ['bStateMachine'],
+    autoplay: true,
+    onLoad: () => {
+        bTriggerInput = riveB.stateMachineInputs('bStateMachine').find(input => input.name === 'bTrigger');
+        riveB.play('bJiggle');
     }
 });
 
-// Optional: Reset to jiggle animation on mouse leave
-canvasA.addEventListener('mouseleave', () => {
-    riveA.play('aJiggle'); // Return to the jiggle loop
+canvasB.addEventListener('click', () => {
+    if (bTriggerInput) bTriggerInput.fire();
 });
-  </script>
+
+// Rive setup for canvasC
+const riveC = new rive.Rive({
+    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/C.riv",
+    canvas: canvasC,
+    artboard: 'C',
+    stateMachines: ['cStateMachine'],
+    autoplay: true,
+    onLoad: () => {
+        cTriggerInput = riveC.stateMachineInputs('cStateMachine').find(input => input.name === 'cTrigger');
+        riveC.play('cJiggle');
+    }
+});
+
+canvasC.addEventListener('click', () => {
+    if (cTriggerInput) cTriggerInput.fire();
+});
+</script>
+
 </body>
 
 </html>
