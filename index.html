@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css");
 
 /* Rive Logo */
-#canvas {
+#canvasA {
   margin: 0 auto;
 }
 
@@ -77,13 +77,13 @@ h2 a:hover {
   color: #BF4F36;
 }
 
-.logo-animation {
+.intro {
   text-align: center;
   background-color: #F2F1E9;
   padding-bottom: 90px;
   padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 /* Navigationen */
@@ -308,6 +308,7 @@ nav a:hover {
 
 
 
+
 </style>
 </head>
   <body>
@@ -320,10 +321,10 @@ nav a:hover {
   </nav>
 
   <div class="container">
-    <div class="logo-animation">
-      <canvas id="canvas" width="100" height="100"></canvas>
+    <div class="intro">
+      <canvas id="canvasA" width="100" height="100"></canvas>
       <h1>Hello!</h1>
-      <h2>I'm a designer and animator based in Jönköping, Sweden. <br>I like clean and playful aesthetics and often work with characters,<br>motion graphics and branding.ヽ(•‿•)ノ<br>
+      <h2>I'm a designer and animator based in Jönköping, Sweden. <br>I like clean and playful aesthetics and often work with characters,<br>motion graphics and branding.<br>
     </div>
 
 <section id="work" class="gallery">
@@ -460,16 +461,38 @@ nav a:hover {
 
   <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
   <script>
-    const r = new rive.Rive({
-      src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/logo2.riv",
-      canvas: document.getElementById("canvas"),
-      autoplay: true,
-      onLoad: () => {
-        r.resizeDrawingSurfaceToCanvas();
-      },
-    });
-  </script>
+const canvasA = document.getElementById('canvasA'); // Canvas for the letter "A"
 
+let aTriggerInput; // Declare the variable for the trigger input
+
+const riveA = new rive.Rive({
+    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/A_4.riv", // Ensure this is the correct path
+    canvas: canvasA,
+    artboard: 'A',
+    stateMachines: ['aStateMachine'], // Name of the state machine
+    autoplay: true, // Start the jiggle animation automatically
+    onLoad: () => {
+        // Find the trigger input in the state machine
+        aTriggerInput = riveA.stateMachineInputs('aStateMachine').find(input => input.name === 'aTrigger');
+        riveA.play('aJiggle'); // Start the looping animation initially
+    }
+});
+
+// Event listener to trigger the jump action on hover
+canvasA.addEventListener('mouseenter', () => {
+    console.log('Mouse entered canvas'); // Confirm event firing
+    if (aTriggerInput) {
+        aTriggerInput.fire(); // Fire the 'aTrigger' input to activate the aAction animation
+    } else {
+        console.error('Trigger input not found'); // Log if trigger input is missing
+    }
+});
+
+// Optional: Reset to jiggle animation on mouse leave
+canvasA.addEventListener('mouseleave', () => {
+    riveA.play('aJiggle'); // Return to the jiggle loop
+});
+  </script>
 </body>
 
 </html>
