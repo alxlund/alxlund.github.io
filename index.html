@@ -111,29 +111,12 @@ nav a:hover {
 }
 
 .logo-animation {
-  display: flex;
   align-items: center;
-  margin-bottom: 20px;
-}
-
-#canvasA {
-  width: 100%;
-  height: auto;
 }
 
 .right-column {
   display: flex;
   flex-direction: column;
-}
-
-#canvasB {
-  padding-left:8px;
-}
-
-#canvasB, #canvasC {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 .intro-text {
@@ -337,9 +320,10 @@ nav a:hover {
   }
 }
 
+
 </style>
 </head>
-  <body>
+<body>
   <!-- Navigation -->
   <nav>
     <a href="#work">Work</a>
@@ -351,11 +335,7 @@ nav a:hover {
   <div class="container">
     <div class="intro">
   <div class="logo-animation">
-    <canvas id="canvasA" width="60" height="100"></canvas>
-    <div class="right-column">
-      <canvas id="canvasB" width="100" height="160"></canvas>
-      <canvas id="canvasC" width="100" height="45"></canvas>
-    </div>
+   <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo2.gif" alt="Logo">
   </div>
   <div class="intro-text">
     <h1>Hello!</h1>
@@ -465,7 +445,7 @@ nav a:hover {
     </section>
       
       <section id="reel" class="reel">
-      <iframe src="https://www.youtube.com/embed/KX5QhMykByE" loading="lazy" title="Reel"></iframe>
+      <iframe src="https://www.youtube.com/embed/18dZX5OBF_o" loading="lazy" title="Reel"></iframe>
     </section>
       
       <section id="contact" class="contact">
@@ -494,67 +474,6 @@ nav a:hover {
       </div>
     </section>
   </div>
-
-<script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
-<script>
-// Canvas and Rive setup for A, B, and C
-const canvasA = document.getElementById('canvasA');
-const canvasB = document.getElementById('canvasB');
-const canvasC = document.getElementById('canvasC');
-
-let aTriggerInput, bTriggerInput, cTriggerInput;
-
-// Rive setup for canvasA
-const riveA = new rive.Rive({
-    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/A_4.riv",
-    canvas: canvasA,
-    artboard: 'A',
-    stateMachines: ['aStateMachine'],
-    autoplay: true,
-    onLoad: () => {
-        aTriggerInput = riveA.stateMachineInputs('aStateMachine').find(input => input.name === 'aTrigger');
-        riveA.play('aJiggle');
-    }
-});
-
-canvasA.addEventListener('click', () => {
-    if (aTriggerInput) aTriggerInput.fire();
-});
-
-// Rive setup for canvasB
-const riveB = new rive.Rive({
-    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/B.riv",
-    canvas: canvasB,
-    artboard: 'B',
-    stateMachines: ['bStateMachine'],
-    autoplay: true,
-    onLoad: () => {
-        bTriggerInput = riveB.stateMachineInputs('bStateMachine').find(input => input.name === 'bTrigger');
-        riveB.play('bJiggle');
-    }
-});
-
-canvasB.addEventListener('click', () => {
-    if (bTriggerInput) bTriggerInput.fire();
-});
-
-// Rive setup for canvasC
-const riveC = new rive.Rive({
-    src: "https://raw.githubusercontent.com/alxlund/alxlund.github.io/main/C.riv",
-    canvas: canvasC,
-    artboard: 'C',
-    stateMachines: ['cStateMachine'],
-    autoplay: true,
-    onLoad: () => {
-        cTriggerInput = riveC.stateMachineInputs('cStateMachine').find(input => input.name === 'cTrigger');
-        riveC.play('cJiggle');
-    }
-});
-
-canvasC.addEventListener('click', () => {
-    if (cTriggerInput) cTriggerInput.fire();
-});
-</script>
 
 </body>
 
