@@ -461,7 +461,7 @@ nav a:hover {
         <div class="bio-text">
           <h1>A bit about me</h1>
           <p>I started off as an intern at <b>Animade</b> in London where I continued working for a few years before moving back to Sweden.<br><br>
-            Since then I've been freelancing and have been lucky to work with more of my favourite studios such as <b>Buck</b>, <b>Nexus</b> and <b>Oddfellows</b>. Clients I've worked with include <b>Google</b>, <b>Apple</b>, <b>Meta</b> and <b>CNN</b>.<br>
+            Since then I've been freelancing and have been lucky to work with more of my favourite studios such as <b>Buck</b>, <b>Nexus</b> and <b>Oddfellows</b>. Clients I've worked with include <b>Google</b>, <b>Apple</b>, <b>ACLU</b> and <b>CNN</b>.<br>
             I enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Sweden.<br><br>
             I do all kinds of 2D animation work and I work mainly in the Adobe Suite. You can also hire me as a Designer, Illustrator or Animation Lead.<br><br>
             If you want to know more you can watch me animate some walk cycles at <a href="https://www.youtube.com/watch?v=Xnqg6F89TmA" target="_blank">Adobe Live</a>, or read an <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank">interview with WeTransfer</a> about my personal project Words and Pals.
@@ -470,7 +470,36 @@ nav a:hover {
       </div>
     </section>
   </div>
+  
+<script>let canvas;
 
+function setup() {
+  let bioDiv = select('.bio'); // Select the bio div
+  let bioBounds = bioDiv.elt.getBoundingClientRect(); // Get its dimensions
+
+  // Create a canvas that matches the bio div's size
+  canvas = createCanvas(bioBounds.width, bioBounds.height);
+  canvas.position(bioBounds.left, bioBounds.top); // Align with bio div
+  canvas.style('pointer-events', 'none'); // Prevent canvas from blocking clicks
+
+  background(255, 0); // Transparent background
+}
+
+function draw() {
+  if (mouseIsPressed) {
+    stroke('#193073');
+    strokeWeight(3);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+}
+
+function windowResized() {
+  let bioDiv = select('.bio');
+  let bioBounds = bioDiv.elt.getBoundingClientRect();
+  resizeCanvas(bioBounds.width, bioBounds.height);
+}
+</script>
+  
 </body>
 
 </html>
