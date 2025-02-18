@@ -470,7 +470,34 @@ nav a:hover {
       </div>
     </section>
   </div>
-  
+<script>let canvas;
+
+function setup() {
+  let bioDiv = select('.bio'); // Select the bio div
+  let bioBounds = bioDiv.elt.getBoundingClientRect(); // Get its dimensions
+
+  // Create a canvas that matches the bio div's size
+  canvas = createCanvas(bioBounds.width, bioBounds.height);
+  canvas.position(bioBounds.left, bioBounds.top); // Align with bio div
+  canvas.style('pointer-events', 'none'); // Prevent canvas from blocking clicks
+
+  background(255, 0); // Transparent background
+}
+
+function draw() {
+  if (mouseIsPressed) {
+    stroke('#193073');
+    strokeWeight(3);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+}
+
+function windowResized() {
+  let bioDiv = select('.bio');
+  let bioBounds = bioDiv.elt.getBoundingClientRect();
+  resizeCanvas(bioBounds.width, bioBounds.height);
+}
+</script>  
   
 </body>
 
