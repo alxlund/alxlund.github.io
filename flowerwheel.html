@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Stacked Animations with Color Controls</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      transition: background-color 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin-bottom: 20px;
+    }
+    
+    .base-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    .animation-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.3s ease;
+    }
+
+    .color-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 1000px;
+      gap: 15px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 100; /* Ensure controls are above animations */
+    }
+
+    .color-control {
+      width: calc(20% - 15px);
+      min-width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      border-radius: 8px;
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    }
+
+    .color-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .color-preview {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .input-with-arrow {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .color-input {
+      width: 65px;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+      text-align: center;
+    }
+
+    .dropdown-arrow {
+      margin-left: 5px;
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    /* Downward arrow (default) */
+    .dropdown-arrow-down {
+      border-top: 6px solid #666;
+      border-bottom: 0;
+    }
+    
+    /* Upward arrow for top row */
+    .dropdown-arrow-up {
+      border-bottom: 6px solid #666;
+      border-top: 0;
+    }
+
+    /* Arrow rotation on open */
+    .color-control.open .dropdown-arrow-down {
+      transform: rotate(180deg);
+    }
+    
+    .color-control.open .dropdown-arrow-up {
+      transform: rotate(180deg);
+    }
+
+    .color-dropdown {
+      display: none;
+      width: 100%;
+      transition: opacity 0.2s ease;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background-color: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Default dropdown position (bottom) */
+    .dropdown-bottom {
+      top: 100%;
+      margin-top: 5px;
+    }
+    
+    /* Top row dropdown position */
+    .dropdown-top {
+      bottom: 100%;
+      margin-bottom: 5px;
+    }
+
+    .color-control.open .color-dropdown {
+      display: block;
+      opacity: 1;
+    }
+
+    .slider-container {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .slider-container label {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .slider-container input[type="range"] {
+      width: 100%;
+      height: 5px;
+    }
+
+    .color-name {
+      font-size: 12px;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .color-control {
+        width: calc(33.33% - 15px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .color-control {
+        width: calc(50% - 15px);
+      }
+    }
+  </style>
+</head>
+<body id="body">
+  <div class="container" id="animation-container">
+    <!-- Base animation layer -->
+    <div id="base-animation" class="base-animation"></div>
+    <!-- Animation layers will be added dynamically above the base -->
+  </div>
+
+  <div class="color-controls" id="color-controls">
+    <!-- Color controls will be added here dynamically -->
+  </div>
+
+  <script>
+    // Initial colors for each animation instance
+    const colors = [
+      "#F3B40E", // Yellow/Gold
+      "#AB94AF", // Lavender
+      "#6D8FB6", // Blue
+      "#CA9543", // Orange/Brown
+      "#D9E28D", // Light Green/Yellow
+      "#78BAC4", // Light Blue
+      "#352287", // Purple
+      "#71A68D", // Mint Green
+      "#BC0000"  // Red
+    ];
+    
+    // Background color (will be the 10th control)
+    let backgroundColor = "#f0f0f0";
+
+    // Animation paths
+    const mainAnimationPath = 'animation1.json';
+    const startAnimationPath = 'StartAnimation5.json';
+    
+    // Animation timing
+    const interval = 1000;
+    
+    // Track animation state
+    let animationCounter = 0;
+    let intervalId = null;
+    let animationLayers = [];
+    let baseAnimation = null;
+    
+    // Create style element for CSS color rules
+    const styleElement = document.createElement('style');
+    document.head.appendChild(styleElement);
+    let styleRules = '';
+    
+    // Get container reference
+    const container = document.getElementById('animation-container');
+    const body = document.getElementById('body');
+    const controlsContainer = document.getElementById('color-controls');
+    
+    // Convert hex to HSL
+    function hexToHSL(hex) {
+      // Remove the # if present
+      hex = hex.replace(/^#/, '');
+      
+      // Parse the hex values
+      let r = parseInt(hex.slice(0, 2), 16) / 255;
+      let g = parseInt(hex.slice(2, 4), 16) / 255;
+      let b = parseInt(hex.slice(4, 6), 16) / 255;
+      
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0; // achromatic
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        
+        h /= 6;
+      }
+
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    }
+
+    // Convert HSL to hex
+    function hslToHex(h, s, l) {
+      h /= 360;
+      s /= 100;
+      l /= 100;
+      
+      let r, g, b;
+      
+      if (s === 0) {
+        r = g = b = l; // achromatic
+      } else {
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        };
+        
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+      }
+      
+      const toHex = x => {
+        const hex = Math.round(x * 255).toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      };
+      
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    // Validate hex color
+    function isValidHex(hex) {
+      return /^#?([0-9A-F]{3}){1,2}$/i.test(hex);
+    }
+    
+    // Create color controls
+    function createColorControls() {
+      // Create all colors + background in a 5x2 grid layout
+      const allColors = [...colors, backgroundColor];
+      const colorNames = Array(colors.length).fill(0).map((_, i) => `Color ${i + 1}`);
+      colorNames.push('Background');
+      
+      allColors.forEach((color, index) => {
+        const isBackground = index === colors.length;
+        const colorId = isBackground ? 'bg' : index;
+        const hsl = hexToHSL(color);
+        
+        // Determine if this is a top row control (first 5 controls)
+        const isTopRow = index < 5;
+        
+        const controlDiv = document.createElement('div');
+        controlDiv.className = 'color-control';
+        controlDiv.id = `control-${colorId}`;
+        
+        const colorName = document.createElement('div');
+        colorName.className = 'color-name';
+        colorName.textContent = colorNames[index];
+        
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'color-header';
+        
+        const colorPreview = document.createElement('div');
+        colorPreview.className = 'color-preview';
+        colorPreview.style.backgroundColor = color;
+        colorPreview.id = `preview-${colorId}`;
+        
+        const inputWithArrow = document.createElement('div');
+        inputWithArrow.className = 'input-with-arrow';
+        
+        const colorInput = document.createElement('input');
+        colorInput.type = 'text';
+        colorInput.className = 'color-input';
+        colorInput.value = color;
+        colorInput.id = `input-${colorId}`;
+        
+        const dropdownArrow = document.createElement('div');
+        // Set appropriate arrow direction based on row
+        dropdownArrow.className = isTopRow ? 
+          'dropdown-arrow dropdown-arrow-up' : 
+          'dropdown-arrow dropdown-arrow-down';
+        
+        inputWithArrow.appendChild(colorInput);
+        inputWithArrow.appendChild(dropdownArrow);
+        
+        // Create dropdown for advanced controls
+        const dropdown = document.createElement('div');
+        dropdown.className = isTopRow ? 
+          'color-dropdown dropdown-top' : 
+          'color-dropdown dropdown-bottom';
+        
+        // Create sliders for hue, saturation, and lightness
+        const hueContainer = document.createElement('div');
+        hueContainer.className = 'slider-container';
+        const hueLabel = document.createElement('label');
+        hueLabel.textContent = 'Hue';
+        const hueSlider = document.createElement('input');
+        hueSlider.type = 'range';
+        hueSlider.min = '0';
+        hueSlider.max = '360';
+        hueSlider.value = hsl.h;
+        hueSlider.id = `hue-${colorId}`;
+        hueContainer.appendChild(hueLabel);
+        hueContainer.appendChild(hueSlider);
+        
+        const satContainer = document.createElement('div');
+        satContainer.className = 'slider-container';
+        const satLabel = document.createElement('label');
+        satLabel.textContent = 'Saturation';
+        const satSlider = document.createElement('input');
+        satSlider.type = 'range';
+        satSlider.min = '0';
+        satSlider.max = '100';
+        satSlider.value = hsl.s;
+        satSlider.id = `sat-${colorId}`;
+        satContainer.appendChild(satLabel);
+        satContainer.appendChild(satSlider);
+        
+        const lightContainer = document.createElement('div');
+        lightContainer.className = 'slider-container';
+        const lightLabel = document.createElement('label');
+        lightLabel.textContent = 'Brightness';
+        const lightSlider = document.createElement('input');
+        lightSlider.type = 'range';
+        lightSlider.min = '0';
+        lightSlider.max = '100';
+        lightSlider.value = hsl.l;
+        lightSlider.id = `light-${colorId}`;
+        lightContainer.appendChild(lightLabel);
+        lightContainer.appendChild(lightSlider);
+        
+        dropdown.appendChild(hueContainer);
+        dropdown.appendChild(satContainer);
+        dropdown.appendChild(lightContainer);
+        
+        headerDiv.appendChild(colorPreview);
+        headerDiv.appendChild(inputWithArrow);
+        
+        controlDiv.appendChild(colorName);
+        controlDiv.appendChild(headerDiv);
+        controlDiv.appendChild(dropdown);
+        
+        // Add event listeners
+        const toggleControlDropdown = function(event) {
+          toggleDropdown(colorId);
+          event.stopPropagation(); // Prevent bubbling
+        };
+        
+        colorPreview.addEventListener('click', toggleControlDropdown);
+        dropdownArrow.addEventListener('click', toggleControlDropdown);
+        
+        if (isBackground) {
+          // For background color
+          colorInput.addEventListener('change', function() {
+            if (isValidHex(this.value)) {
+              let newColor = this.value;
+              if (!newColor.startsWith('#')) {
+                newColor = '#' + newColor;
+              }
+              backgroundColor = newColor;
+              colorPreview.style.backgroundColor = newColor;
+              
+              const hsl = hexToHSL(newColor);
+              document.getElementById(`hue-${colorId}`).value = hsl.h;
+              document.getElementById(`sat-${colorId}`).value = hsl.s;
+              document.getElementById(`light-${colorId}`).value = hsl.l;
+              
+              // Apply to body
+              document.body.style.backgroundColor = newColor;
+            } else {
+              // Reset to existing color if invalid
+              this.value = backgroundColor;
+            }
+          });
+          
+          // Using change instead of input prevents the dropdown from closing
+          hueSlider.addEventListener('input', updateBackgroundColorFromSliders);
+          satSlider.addEventListener('input', updateBackgroundColorFromSliders);
+          lightSlider.addEventListener('input', updateBackgroundColorFromSliders);
+        } else {
+          // For animation colors
+          colorInput.addEventListener('change', function() {
+            if (isValidHex(this.value)) {
+              let newColor = this.value;
+              if (!newColor.startsWith('#')) {
+                newColor = '#' + newColor;
+              }
+              colors[index] = newColor;
+              colorPreview.style.backgroundColor = newColor;
+              
+              const hsl = hexToHSL(newColor);
+              document.getElementById(`hue-${colorId}`).value = hsl.h;
+              document.getElementById(`sat-${colorId}`).value = hsl.s;
+              document.getElementById(`light-${colorId}`).value = hsl.l;
+              
+              updateColorInAnimations(index);
+            } else {
+              // Reset to existing color if invalid
+              this.value = colors[index];
+            }
+          });
+          
+          // Using input events but NOT closing dropdown
+          hueSlider.addEventListener('input', function() {
+            updateColorFromSliders(index);
+          });
+          
+          satSlider.addEventListener('input', function() {
+            updateColorFromSliders(index);
+          });
+          
+          lightSlider.addEventListener('input', function() {
+            updateColorFromSliders(index);
+          });
+        }
+        
+        controlsContainer.appendChild(controlDiv);
+      });
+      
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function(event) {
+        // Only close if clicking outside a control or on a control element that's not a slider
+        const isSlider = event.target.type === 'range';
+        const isColorInput = event.target.classList.contains('color-input');
+        
+        if (!isSlider && !isColorInput && 
+            (!event.target.closest('.color-control') || 
+            (event.target.closest('.color-control') && 
+             !event.target.closest('.color-preview') && 
+             !event.target.closest('.dropdown-arrow')))) {
+          closeAllDropdowns();
+        }
+      });
+    }
+    
+    // Toggle dropdown display
+    function toggleDropdown(colorId) {
+      // Close any open dropdowns
+      const openDropdowns = document.querySelectorAll('.color-control.open');
+      openDropdowns.forEach(dropdown => {
+        if (dropdown.id !== `control-${colorId}`) {
+          dropdown.classList.remove('open');
+        }
+      });
+      
+      // Toggle the clicked dropdown
+      const control = document.getElementById(`control-${colorId}`);
+      control.classList.toggle('open');
+    }
+    
+    // Close all dropdowns
+    function closeAllDropdowns() {
+      const openDropdowns = document.querySelectorAll('.color-control.open');
+      openDropdowns.forEach(dropdown => {
+        dropdown.classList.remove('open');
+      });
+    }
+    
+    // Update color based on slider values
+    function updateColorFromSliders(index) {
+      const hue = parseInt(document.getElementById(`hue-${index}`).value);
+      const sat = parseInt(document.getElementById(`sat-${index}`).value);
+      const light = parseInt(document.getElementById(`light-${index}`).value);
+      
+      const newColor = hslToHex(hue, sat, light);
+      colors[index] = newColor;
+      
+      document.getElementById(`preview-${index}`).style.backgroundColor = newColor;
+      document.getElementById(`input-${index}`).value = newColor;
+      
+      updateColorInAnimations(index);
+    }
+    
+    // Update color in animations
+    function updateColorInAnimations(index) {
+      const newColor = colors[index];
+      
+      // Update CSS for existing animation layers with this color
+      animationLayers.forEach(layer => {
+        if (layer.id % colors.length === index) {
+          const layerId = layer.id;
+          const updatedRule = `
+            #anim-layer-${layerId} svg * {
+              fill: ${newColor} !important;
+              stroke: ${newColor} !important;
+            }
+          `;
+          
+          // Find and replace the rule for this layer
+          styleRules = styleRules.replace(new RegExp(`#anim-layer-${layerId} svg \\* \\{[^}]*\\}`, 'g'), updatedRule.trim());
+        }
+      });
+      
+      styleElement.textContent = styleRules;
+    }
+    
+    // Update background color from sliders
+    function updateBackgroundColorFromSliders() {
+      const hue = parseInt(document.getElementById('hue-bg').value);
+      const sat = parseInt(document.getElementById('sat-bg').value);
+      const light = parseInt(document.getElementById('light-bg').value);
+      
+      const newColor = hslToHex(hue, sat, light);
+      backgroundColor = newColor;
+      
+      document.getElementById('preview-bg').style.backgroundColor = newColor;
+      document.getElementById('input-bg').value = newColor;
+      
+      // Apply to body
+      document.body.style.backgroundColor = newColor;
+    }
+    
+    // Initialize base animation
+    function initBaseAnimation() {
+      const baseElement = document.getElementById('base-animation');
+      
+      baseAnimation = lottie.loadAnimation({
+        container: baseElement,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: startAnimationPath,
+        rendererSettings: {
+          progressiveLoad: true
+        }
+      });
+    }
+    
+    // Function to create a new animation layer
+    function createAnimationLayer() {
+      const colorIndex = animationCounter % colors.length;
+      const color = colors[colorIndex];
+      
+      // Create container for this animation instance
+      const layerElement = document.createElement('div');
+      layerElement.className = 'animation-layer';
+      layerElement.id = `anim-layer-${animationCounter}`;
+      layerElement.style.zIndex = animationCounter + 10; // Start at 10 to be above base layer
+      container.appendChild(layerElement);
+      
+      // Add style rule for this color
+      styleRules += `
+        #anim-layer-${animationCounter} svg * {
+          fill: ${color} !important;
+          stroke: ${color} !important;
+        }
+      `;
+      styleElement.textContent = styleRules;
+      
+      // Create Lottie animation
+      const animation = lottie.loadAnimation({
+        container: layerElement,
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: mainAnimationPath,
+        rendererSettings: {
+          progressiveLoad: true
+        }
+      });
+      
+      // Store reference to this layer
+      animationLayers.push({
+        element: layerElement,
+        animation: animation,
+        id: animationCounter
+      });
+      
+      // Increment counter for next animation
+      animationCounter++;
+      
+      // Manage memory by removing old animations
+      // Keep the most recent 15 animations to avoid browser slowdown
+      if (animationLayers.length > 15) {
+        const oldestLayer = animationLayers.shift();
+        oldestLayer.animation.destroy();
+        if (oldestLayer.element.parentNode) {
+          oldestLayer.element.parentNode.removeChild(oldestLayer.element);
+        }
+      }
+    }
+    
+    // Function to start the animation sequence
+    function startAnimationSequence() {
+      // Initialize the base animation
+      initBaseAnimation();
+      
+      // Create color controls
+      createColorControls();
+      
+      // First, add animations with time offsets to simulate they were already playing
+      for (let i = 0; i < 9; i++) {
+        createAnimationLayer();
+      }
+      
+      // Then set up interval to add new animations continuously
+      intervalId = setInterval(createAnimationLayer, interval);
+    }
+    
+    // Start animations as soon as the page loads
+    window.addEventListener('load', startAnimationSequence);
+  </script>
+</body>
+</html>
