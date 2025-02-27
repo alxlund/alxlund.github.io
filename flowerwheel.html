@@ -65,7 +65,7 @@
       padding: 8px 0;
       border-radius: 8px;
       position: relative;
-      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      background-color: transparent; /* Semi-transparent background */
     }
 
     .color-header {
@@ -208,6 +208,7 @@
   <script>
     // Initial colors for each animation instance
     const colors = [
+      "#BC0000",  // Red
       "#F3B40E", // Yellow/Gold
       "#AB94AF", // Lavender
       "#6D8FB6", // Blue
@@ -216,7 +217,6 @@
       "#78BAC4", // Light Blue
       "#352287", // Purple
       "#71A68D", // Mint Green
-      "#BC0000"  // Red
     ];
     
     // Background color (will be the 10th control)
@@ -592,117 +592,116 @@
       document.body.style.backgroundColor = newColor;
     }
     
-    // Initialize base animation
-    function initBaseAnimation() {
-      const baseElement = document.getElementById('base-animation');
-      
-      baseAnimation = lottie.loadAnimation({
+
+
+
+   // Initialize base animation
+function initBaseAnimation() {
+    const baseElement = document.getElementById('base-animation');
+
+    baseAnimation = lottie.loadAnimation({
         container: baseElement,
         renderer: 'svg',
         loop: false, // Make sure start animation plays only once
         autoplay: true,
         path: startAnimationPath,
         rendererSettings: {
-          progressiveLoad: true
+            progressiveLoad: true
         }
-      });
-      
-      // Start the main animation as soon as the base animation starts playing
-      baseAnimation.addEventListener('DOMLoaded', function() {
-        // Create the first animation layer immediately when base animation loads
-        createAnimationLayer();
+    });
+
+    // Start the main animation as soon as the base animation starts playing
+    baseAnimation.addEventListener('DOMLoaded', function() {
+        // Start both animations at the same time
+        createAnimationLayer(); 
         animationStarted = true;
         
-        // Start the timer for subsequent animations
+        // Start the interval for subsequent animations
         startAnimationTimer();
-      });
-    }
-    
-    // Create a new animation layer
-    function createAnimationLayer() {
-      const colorIndex = animationCounter % colors.length;
-      const color = colors[colorIndex];
-      
-      // Create container for this animation instance
-      const layerElement = document.createElement('div');
-      layerElement.className = 'animation-layer';
-      layerElement.id = `anim-layer-${animationCounter}`;
-      layerElement.style.zIndex = animationCounter + 10; // Start at 10 to be above base layer
-      container.appendChild(layerElement);
-      
-      // Add style rule for this color
-      styleRules += `
+    });
+}
+
+// Create a new animation layer
+function createAnimationLayer() {
+    const colorIndex = animationCounter % colors.length;
+    const color = colors[colorIndex];
+
+    // Create container for this animation instance
+    const layerElement = document.createElement('div');
+    layerElement.className = 'animation-layer';
+    layerElement.id = `anim-layer-${animationCounter}`;
+    layerElement.style.zIndex = animationCounter + 10; // Ensure layering
+    container.appendChild(layerElement);
+
+    // Add style rule for this color
+    styleRules += `
         #anim-layer-${animationCounter} svg * {
-          fill: ${color} !important;
-          stroke: ${color} !important;
+            fill: ${color} !important;
+            stroke: ${color} !important;
         }
-      `;
-      styleElement.textContent = styleRules;
-      
-      // Create Lottie animation
-      const animation = lottie.loadAnimation({
+    `;
+    styleElement.textContent = styleRules;
+
+    // Create Lottie animation
+    const animation = lottie.loadAnimation({
         container: layerElement,
         renderer: 'svg',
         loop: false,
         autoplay: true,
         path: mainAnimationPath,
         rendererSettings: {
-          progressiveLoad: true
+            progressiveLoad: true
         }
-      });
-      
-      // Store reference to this layer
-      animationLayers.push({
+    });
+
+    // Store reference to this layer
+    animationLayers.push({
         element: layerElement,
         animation: animation,
         id: animationCounter
-      });
-      
-      // Increment counter for next animation
-      animationCounter++;
-      
-      // Manage memory by removing old animations
-      // Keep the most recent 15 animations to avoid browser slowdown
-      if (animationLayers.length > 15) {
+    });
+
+    // Increment counter for next animation
+    animationCounter++;
+
+    // Manage memory by removing old animations (keep the most recent 15)
+    if (animationLayers.length > 15) {
         const oldestLayer = animationLayers.shift();
         oldestLayer.animation.destroy();
         if (oldestLayer.element.parentNode) {
-          oldestLayer.element.parentNode.removeChild(oldestLayer.element);
+            oldestLayer.element.parentNode.removeChild(oldestLayer.element);
         }
-      }
     }
-    
-    // Function to maintain precise timing for animations
-    function startAnimationTimer() {
-      let lastTime = Date.now();
-      
-      function nextAnimation() {
+}
+
+// Function to maintain precise timing for animations
+function startAnimationTimer() {
+    let lastTime = Date.now();
+
+    function nextAnimation() {
         const now = Date.now();
         const elapsed = now - lastTime;
         const delay = Math.max(0, interval - (elapsed % interval));
-        
+
         lastTime = now - (elapsed % interval);
-        createAnimationLayer();
-        
+        createAnimationLayer(); // Creates a new animation layer every 1 sec
+
         setTimeout(nextAnimation, delay);
-      }
-      
-      // Initial delay to align with the interval
-      setTimeout(nextAnimation, interval);
     }
-    
-    // Function to start the animation sequence
-    function startAnimationSequence() {
-      // Create color controls
-      createColorControls();
-      
-      // Initialize the base animation
-      // The first main animation will be created when this loads (see initBaseAnimation)
-      initBaseAnimation();
-    }
-    
-    // Start animations as soon as the page loads
-    window.addEventListener('load', startAnimationSequence);
+
+    // Initial delay to align with the interval
+    setTimeout(nextAnimation, interval);
+}
+
+// Function to start the animation sequence
+function startAnimationSequence() {
+    createColorControls(); // Allow color changes
+    initBaseAnimation(); // Start animations (StartAnimation5.json + first animation1.json)
+}
+
+// Start animations as soon as the page loads
+window.addEventListener('load', startAnimationSequence);
+ 
   </script>
 </body>
 </html>
