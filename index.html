@@ -244,12 +244,17 @@ nav a:hover {
 }
 
 .reel iframe {
-  border: none; /* Removes the border */
-  width: 100%; /* Full width of the section */
-  max-width: 1000px; /* Optional: limits maximum width */
-  aspect-ratio: 16/9; /* Ensures it maintains the correct ratio */
-  display: block; /* Centers the video if the section has centered text */
-  margin: 0 auto; /* Centers the video horizontally */
+  border: none;
+  width: 100%; 
+  max-width: 1000px;
+  aspect-ratio: 16/9;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Hide the smaller video by default on larger screens */
+#smaller-video {
+  display: none;
 }
 
 .contact {
@@ -298,6 +303,14 @@ nav a:hover {
     column-count: 1;
     --webkit-column-count: 1;
     --moz-column-count: 1;
+  }
+
+  #sd-video {
+    display: none;
+  }
+  
+  #smaller-video {
+    display: block;
   }
   
   .bio {
@@ -460,13 +473,31 @@ nav a:hover {
       <!-- Add more images here -->
     </section>
       
-<video controls width="100%" poster="thumbnail.jpg">
-  <source src="https://github.com/alxlund/alxlund.github.io/raw/refs/heads/main/reel_16x9_640.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<section class="reel">
+    <!-- SD Version from Google Drive -->
+    <iframe 
+        id="sd-video" 
+        src="https://drive.google.com/file/d/1ukhFq_c0muQLIVhqVCfI6p2bMIOOVNuT/preview" 
+        allow="autoplay" 
+        allowfullscreen
+    ></iframe>
 
+    <!-- Smaller Version from Google Drive -->
+    <iframe 
+        id="smaller-video" 
+        src="https://drive.google.com/file/d/10DL77y9hHMjjE7EtYft2ptsVmT-r2xA9/preview" 
+        allow="autoplay" 
+        allowfullscreen
+    ></iframe>
 
-    </section>
+    <!-- YouTube Backup -->
+    <iframe 
+        id="youtube-video" 
+        src="https://www.youtube.com/embed/bRWZ6RzAnTY" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen
+    ></iframe>
+</section>
 
     <section id="about" class="bio">
       <div class="bio-content">
@@ -483,33 +514,28 @@ nav a:hover {
       </div>
     </section>
   </div>
-<script>let canvas;
-
-function setup() {
-  let bioDiv = select('.bio'); // Select the bio div
-  let bioBounds = bioDiv.elt.getBoundingClientRect(); // Get its dimensions
-
-  // Create a canvas that matches the bio div's size
-  canvas = createCanvas(bioBounds.width, bioBounds.height);
-  canvas.position(bioBounds.left, bioBounds.top); // Align with bio div
-  canvas.style('pointer-events', 'none'); // Prevent canvas from blocking clicks
-
-  background(255, 0); // Transparent background
-}
-
-function draw() {
-  if (mouseIsPressed) {
-    stroke('#193073');
-    strokeWeight(3);
-    line(pmouseX, pmouseY, mouseX, mouseY);
-  }
-}
-
-function windowResized() {
-  let bioDiv = select('.bio');
-  let bioBounds = bioDiv.elt.getBoundingClientRect();
-  resizeCanvas(bioBounds.width, bioBounds.height);
-}
+<script>
+// Optional: YouTube embed fallback script
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.querySelector('video');
+            var sources = video.getElementsByTagName('source');
+            
+            // Function to try next source if current source fails
+            function tryNextSource() {
+                for (var i = 0; i < sources.length; i++) {
+                    if (sources[i].getAttribute('src') === video.currentSrc) {
+                        // Try the next source if available
+                        if (i + 1 < sources.length) {
+                            video.src = sources[i + 1].getAttribute('src');
+                        }
+                        break;
+                    }
+                }
+            }
+            
+            // Add error listener to try alternative sources
+            video.addEventListener('error', tryNextSource, true);
+        });
 </script>  
   
 </body>
