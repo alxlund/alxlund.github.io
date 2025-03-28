@@ -536,27 +536,31 @@ nav a:hover {
     </section>
   </div>
 <script>
-// Optional: YouTube embed fallback script
-        document.addEventListener('DOMContentLoaded', function() {
-            var video = document.querySelector('video');
-            var sources = video.getElementsByTagName('source');
-            
-            // Function to try next source if current source fails
-            function tryNextSource() {
-                for (var i = 0; i < sources.length; i++) {
-                    if (sources[i].getAttribute('src') === video.currentSrc) {
-                        // Try the next source if available
-                        if (i + 1 < sources.length) {
-                            video.src = sources[i + 1].getAttribute('src');
-                        }
-                        break;
-                    }
-                }
-            }
-            
-            // Add error listener to try alternative sources
-            video.addEventListener('error', tryNextSource, true);
-        });
+document.addEventListener('DOMContentLoaded', function() {
+  const sdVideo = document.getElementById('sd-video');
+  const smallerVideo = document.getElementById('smaller-video');
+  const youtubeVideo = document.getElementById('youtube-video');
+
+  function showYouTubeFallback() {
+    sdVideo.style.display = 'none';
+    smallerVideo.style.display = 'none';
+    youtubeVideo.style.display = 'block';
+  }
+
+  // Add error listeners to both primary video sources
+  [sdVideo, smallerVideo].forEach(video => {
+    video.addEventListener('error', function() {
+      // If one video source fails, try the next
+      if (video === sdVideo) {
+        sdVideo.style.display = 'none';
+        smallerVideo.style.display = 'block';
+      } else {
+        // If smaller video also fails, show YouTube
+        showYouTubeFallback();
+      }
+    });
+  });
+});
 </script>  
   
 </body>
