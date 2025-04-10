@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Wheel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/1.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/2.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/3.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/4.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/5.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/6.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/7.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/8.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/9.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/10.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/11.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/12.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/13.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/14.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/15.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/16.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/17.json" as="fetch" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0; /* Default background */
+        }
+
+        /* Lottie container styling */
+        #lottie-container {
+            position: relative;
+            width: 90vw; /* Responsive width */
+            height: 90vw; /* Responsive height */
+            max-width: 600px; /* Max size */
+            max-height: 600px; /* Max size */
+            margin-bottom: -60px; /* Adjust overlap */
+            margin-top: -40px; /* Adjust spacing */
+            transform: scale(1);
+        }
+
+        /* Style for individual Lottie layers */
+        .lottie-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            will-change: transform; /* Performance optimization */
+            transform: translateZ(0); /* Performance optimization */
+        }
+
+        /* Ensure SVG colors are controlled by the 'color' style */
+        #lottie-container div[style*="color:"] svg * {
+            fill: currentColor !important;
+            stroke: currentColor !important;
+        }
+
+        /* Style for color pickers */
+        .color-picker-input {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            appearance: none;
+            -webkit-appearance: none;
+            /* Add a subtle border for better visibility */
+            border: 1px solid #ccc;
+        }
+
+        .color-picker-input::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-picker-input::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
+        }
+
+        .color-picker-input::-moz-color-swatch {
+            border: none;
+            border-radius: 50%;
+        }
+
+        /* Style for active icon */
+        .control-icon.active {
+            background-color: #e0e0e0; /* Light grey background for active */
+            border: 2px solid #9ca3af; /* Tailwind gray-400 */
+        }
+
+        /* Hide elements using the 'hidden' class */
+        .hidden {
+            display: none;
+        }
+
+        /* Styling for the file input */
+        #upload-input::file-selector-button {
+            @apply px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-blue-600 transition duration-200 mr-4;
+        }
+         /* Styling for the download button */
+        #download-button {
+             @apply px-4 py-2 bg-green-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-green-600 transition duration-200;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 md:p-10">
+
+    <div id="main-container" class="flex flex-col items-center w-full max-w-3xl">
+
+        <div id="lottie-container">
+            <div id="lottie-1" class="lottie-layer"></div>
+            <div id="lottie-2" class="lottie-layer"></div>
+            <div id="lottie-3" class="lottie-layer"></div>
+            <div id="lottie-4" class="lottie-layer"></div>
+            <div id="lottie-5" class="lottie-layer"></div>
+            <div id="lottie-6" class="lottie-layer"></div>
+            <div id="lottie-7" class="lottie-layer"></div>
+            <div id="lottie-8" class="lottie-layer"></div>
+            <div id="lottie-9" class="lottie-layer"></div>
+            <div id="lottie-10" class="lottie-layer"></div>
+            <div id="lottie-11" class="lottie-layer"></div>
+            <div id="lottie-12" class="lottie-layer"></div>
+            <div id="lottie-13" class="lottie-layer"></div>
+            <div id="lottie-14" class="lottie-layer"></div>
+            <div id="lottie-15" class="lottie-layer"></div>
+            <div id="lottie-16" class="lottie-layer"></div>
+            <div id="lottie-17" class="lottie-layer"></div>
+        </div>
+
+        <div id="controls-container" class="flex flex-col items-center mt-8 w-full max-w-md">
+            <div id="control-icons" class="flex justify-center items-center gap-3 mb-4 p-2 bg-white rounded-full shadow-md">
+                <div id="upload-icon" class="control-icon p-2 rounded-full cursor-pointer hover:bg-gray-100 transition duration-150" data-content="upload">
+                    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Upload.svg" alt="Upload Colors" class="w-8 h-8">
+                </div>
+                <div id="color-picker-icon" class="control-icon p-2 rounded-full cursor-pointer hover:bg-gray-100 transition duration-150 active" data-content="color">
+                    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/ColorPickerIcon.svg" alt="Color Picker" class="w-8 h-8">
+                </div>
+                <div id="download-icon" class="control-icon p-2 rounded-full cursor-pointer hover:bg-gray-100 transition duration-150" data-content="download">
+                    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Download.svg" alt="Download Colors" class="w-8 h-8">
+                </div>
+            </div>
+
+            <div class="w-full p-4 bg-white rounded-3xl shadow-lg">
+                <div id="color-content" class="content-section flex flex-wrap justify-center gap-3">
+                    <input type="color" id="color-picker-1" class="color-picker-input" value="#AB94AF" data-index="1">
+                    <input type="color" id="color-picker-2" class="color-picker-input" value="#587CA6" data-index="2">
+                    <input type="color" id="color-picker-3" class="color-picker-input" value="#CA9543" data-index="3">
+                    <input type="color" id="color-picker-4" class="color-picker-input" value="#D9E28D" data-index="4">
+                    <input type="color" id="color-picker-5" class="color-picker-input" value="#4CAFBD" data-index="5">
+                    <input type="color" id="color-picker-6" class="color-picker-input" value="#352287" data-index="6">
+                    <input type="color" id="color-picker-7" class="color-picker-input" value="#71A68D" data-index="7">
+                    <input type="color" id="color-picker-8" class="color-picker-input" value="#BC0000" data-index="8">
+                    <input type="color" id="color-picker-9" class="color-picker-input" value="#F3B40E" data-index="9">
+                    <input type="color" id="color-picker-10" class="color-picker-input" value="#f0f0f0" data-index="10"> </div>
+
+                <div id="upload-content" class="content-section hidden flex flex-col items-center gap-4">
+                     <label for="upload-input" class="text-gray-700 font-medium">Upload Hex Codes (.txt):</label>
+                    <input type="file" id="upload-input" accept=".txt" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"/>
+                    <div id="upload-status" class="text-sm text-gray-600 h-4"></div> <div id="swatch-preview" class="flex gap-2 mt-2"></div> </div>
+
+                <div id="download-content" class="content-section hidden flex flex-col items-center gap-4">
+                    <p class="text-gray-700 font-medium">Download current colors as a .txt file:</p>
+                    <button id="download-button">Download Hex Codes</button>
+                     <div id="download-status" class="text-sm text-gray-600 h-4"></div> </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+    <script>
+        // Wait for the DOM to be fully loaded before running scripts
+        document.addEventListener('DOMContentLoaded', () => {
+            const animationContainer = document.getElementById('lottie-container');
+            const numberOfAnimations = 17;
+            const animations = [];
+            const baseURL = 'https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/';
+            const colorPickers = document.querySelectorAll('.color-picker-input');
+            const bodyElement = document.body;
+
+            // --- Lottie Animation Setup ---
+
+            // Mapping of color pickers to animation indices (0-based)
+            // Picker 1 controls layers 1 & 10, Picker 2 controls 2 & 11, etc.
+            // Picker 10 controls the body background
+            const colorPickerMap = {
+                'color-picker-1': [0, 9],
+                'color-picker-2': [1, 10],
+                'color-picker-3': [2, 11],
+                'color-picker-4': [3, 12],
+                'color-picker-5': [4, 13],
+                'color-picker-6': [5, 14],
+                'color-picker-7': [6, 15],
+                'color-picker-8': [7, 16],
+                'color-picker-9': [8], // Only controls layer 9
+                'color-picker-10': [], // Special case for body background
+            };
+
+            // Function to update Lottie layer colors
+            const updateLottieColor = (pickerId, newColor) => {
+                const targetIndices = colorPickerMap[pickerId];
+                if (!targetIndices) return; // Exit if no mapping found
+
+                if (pickerId === 'color-picker-10') {
+                    // Special case: Update body background
+                    bodyElement.style.backgroundColor = newColor;
+                } else {
+                    // Update colors for the mapped Lottie layers
+                    targetIndices.forEach(index => {
+                        const layerElement = document.getElementById(`lottie-${index + 1}`);
+                        if (layerElement) {
+                            layerElement.style.color = newColor;
+                        }
+                    });
+                }
+            };
+
+            // Load all Lottie animations
+            // Using setTimeout to slightly delay loading, allowing the page to render first
+            setTimeout(() => {
+                for (let i = 1; i <= numberOfAnimations; i++) {
+                    const animationID = `lottie-${i}`;
+                    const container = document.getElementById(animationID);
+                    if (container) {
+                        const animationData = {
+                            container: container,
+                            renderer: 'svg',
+                            loop: true,
+                            autoplay: true,
+                            path: `${baseURL}${i}.json`, // Path to the JSON file
+                        };
+                        const anim = lottie.loadAnimation(animationData);
+                        animations.push(anim);
+
+                        // Apply initial color based on the corresponding picker's default value
+                        // Find which picker controls this animation index (i-1)
+                         for (const pickerId in colorPickerMap) {
+                             if (colorPickerMap[pickerId].includes(i - 1)) {
+                                 const initialColor = document.getElementById(pickerId)?.value;
+                                 if (initialColor) {
+                                     container.style.color = initialColor;
+                                 }
+                                 break; // Stop searching once found
+                             }
+                         }
+                    } else {
+                        console.warn(`Container element not found for lottie-${i}`);
+                        animations.push(null); // Push null to keep array indices correct
+                    }
+                }
+
+                 // Apply initial background color
+                const initialBgColor = document.getElementById('color-picker-10')?.value;
+                if (initialBgColor) {
+                    bodyElement.style.backgroundColor = initialBgColor;
+                }
+
+            }, 100); // Small delay
+
+            // Add event listeners to color pickers
+            colorPickers.forEach(picker => {
+                picker.addEventListener('input', (event) => {
+                    updateLottieColor(event.target.id, event.target.value);
+                });
+            });
+
+            // --- Control Toggling Logic ---
+
+            const controlIcons = document.querySelectorAll('.control-icon');
+            const contentSections = document.querySelectorAll('.content-section');
+            const uploadIcon = document.getElementById('upload-icon');
+            const colorPickerIcon = document.getElementById('color-picker-icon');
+            const downloadIcon = document.getElementById('download-icon');
+            const uploadContent = document.getElementById('upload-content');
+            const colorContent = document.getElementById('color-content');
+            const downloadContent = document.getElementById('download-content');
+
+            // Function to show the selected content section and highlight the active icon
+            const showContent = (contentId) => {
+                // Hide all content sections
+                contentSections.forEach(section => section.classList.add('hidden'));
+                // Remove active class from all icons
+                controlIcons.forEach(icon => icon.classList.remove('active'));
+
+                // Show the selected content section
+                const sectionToShow = document.getElementById(`${contentId}-content`);
+                if (sectionToShow) {
+                    sectionToShow.classList.remove('hidden');
+                }
+
+                // Add active class to the clicked icon
+                const iconToActivate = document.getElementById(`${contentId}-icon`);
+                 if (iconToActivate) {
+                    iconToActivate.classList.add('active');
+                }
+            };
+
+            // Add click listeners to icons
+            controlIcons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    const contentTarget = icon.getAttribute('data-content');
+                    if (contentTarget) {
+                        showContent(contentTarget);
+                    }
+                });
+            });
+
+            // --- File Upload Logic ---
+            const uploadInput = document.getElementById('upload-input');
+            const uploadStatus = document.getElementById('upload-status');
+            const swatchPreview = document.getElementById('swatch-preview');
+
+            uploadInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) {
+                    uploadStatus.textContent = 'No file selected.';
+                    swatchPreview.innerHTML = ''; // Clear preview
+                    return;
+                }
+
+                if (file.type !== 'text/plain') {
+                    uploadStatus.textContent = 'Error: Please upload a .txt file.';
+                     swatchPreview.innerHTML = ''; // Clear preview
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const text = e.target.result;
+                    // Assume hex codes are separated by newlines or spaces
+                    const hexCodes = text.match(/#[0-9a-fA-F]{6}/g); // Extract hex codes
+
+                    if (!hexCodes || hexCodes.length === 0) {
+                        uploadStatus.textContent = 'Error: No valid hex codes found in the file.';
+                        swatchPreview.innerHTML = ''; // Clear preview
+                        return;
+                    }
+
+                    // Clear previous preview
+                    swatchPreview.innerHTML = '';
+
+                    // Apply the first 10 hex codes to the color pickers and update Lottie
+                    hexCodes.slice(0, 10).forEach((hex, index) => {
+                        const picker = document.getElementById(`color-picker-${index + 1}`);
+                        if (picker) {
+                            picker.value = hex;
+                            // Trigger the input event manually to update Lottie colors
+                            picker.dispatchEvent(new Event('input', { bubbles: true }));
+
+                             // Add swatch to preview
+                            const swatchDiv = document.createElement('div');
+                            swatchDiv.style.width = '20px';
+                            swatchDiv.style.height = '20px';
+                            swatchDiv.style.backgroundColor = hex;
+                            swatchDiv.style.borderRadius = '50%';
+                            swatchDiv.style.border = '1px solid #ccc';
+                            swatchDiv.title = hex; // Show hex on hover
+                            swatchPreview.appendChild(swatchDiv);
+                        }
+                    });
+
+                    uploadStatus.textContent = `Successfully loaded ${Math.min(hexCodes.length, 10)} colors.`;
+                     // Clear the file input value so the same file can be uploaded again if needed
+                    uploadInput.value = '';
+                };
+
+                reader.onerror = () => {
+                    uploadStatus.textContent = 'Error reading file.';
+                    swatchPreview.innerHTML = ''; // Clear preview
+                     uploadInput.value = '';
+                };
+
+                reader.readAsText(file);
+            });
+
+
+            // --- File Download Logic ---
+            const downloadButton = document.getElementById('download-button');
+            const downloadStatus = document.getElementById('download-status');
+
+             downloadButton.addEventListener('click', () => {
+                let hexContent = '';
+                // Get hex codes from all color pickers
+                colorPickers.forEach(picker => {
+                    hexContent += `${picker.value}\n`; // Add each hex code on a new line
+                });
+
+                // Remove the last newline character
+                hexContent = hexContent.trim();
+
+                if (!hexContent) {
+                    downloadStatus.textContent = 'No colors to download.';
+                    return;
+                }
+
+                // Create a Blob (Binary Large Object) with the text content
+                const blob = new Blob([hexContent], { type: 'text/plain;charset=utf-8' });
+
+                // Create a temporary link element
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob); // Create a URL for the Blob
+                link.download = 'flower_wheel_colors.txt'; // Set the filename for download
+                link.style.display = 'none'; // Hide the link
+
+                // Append the link to the body, click it, and then remove it
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Revoke the object URL to free up memory
+                URL.revokeObjectURL(link.href);
+
+                downloadStatus.textContent = 'Colors downloaded!';
+                 // Clear status after a few seconds
+                setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
+            });
+
+             // Initialize the view to show the color picker content
+             showContent('color');
+
+        }); // End DOMContentLoaded
+    </script>
+</body>
+</html>
