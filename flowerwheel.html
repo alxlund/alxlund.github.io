@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Wheel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/1.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/2.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/3.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/4.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/5.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/6.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/7.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/8.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/9.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/10.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/11.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/12.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/13.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/14.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/15.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/16.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/17.json" as="fetch" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/mal2egx.css">
+
+    <style>
+        /* User updated font */
+        body { font-family: "akzidenz-grotesk-next-pro", sans-serif; font-weight: 700; background-color: #f0f0f0; }
+        #lottie-container { position: relative; width: 90vw; max-width: 600px; height: 90vw; max-height: 600px; margin-bottom: 0px; margin-top: -40px; transform: scale(1); }
+        .lottie-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; will-change: transform; transform: translateZ(0); }
+        #lottie-container div[style*="color:"] svg * { fill: currentColor !important; stroke: currentColor !important; }
+        .color-picker-input { width: 30px; height: 30px; padding: 0; border: none; cursor: pointer; border-radius: 50%; appearance: none; -webkit-appearance: none; }
+        .color-picker-input::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-picker-input::-webkit-color-swatch { border: none; border-radius: 50%; }
+        .color-picker-input::-moz-color-swatch { border: none; border-radius: 50%; }
+        .hidden { display: none; }
+
+        /* --- Icon Styling (Plain CSS) --- */
+        .control-icon {
+            padding: 0.5rem; border-radius: 50%; background-color: #ffffff; cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .control-icon:hover { transform: scale(1.05); }
+        .control-icon img { display: block; opacity: 1; }
+        /* --- End Icon Styling --- */
+
+        /* Base styles for content sections */
+        .content-section {
+            /* Removed fixed height, let content dictate */
+            /* height: 30px; */
+            /* Use min-height to ensure space for messages */
+            max-height: 40px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 0.5rem; /* Add some padding */
+            padding-bottom: 0.5rem; /* Add some padding */
+        }
+
+        /* Specific styles for #color-content */
+        #color-content {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        /* Specific styles for upload/download */
+        #upload-content, #download-content {
+             flex-direction: column;
+             gap: 0.5rem; /* Gap between label/button and status/preview */
+        }
+        /* Style for generated swatches */
+         .swatch-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            display: inline-block; /* Make them sit nicely in flex */
+        }
+
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 md:p-10">
+
+    <div id="main-container" class="flex flex-col items-center w-full max-w-3xl">
+
+        <div id="lottie-container">
+            <div id="lottie-1" class="lottie-layer"></div>
+            <div id="lottie-2" class="lottie-layer"></div>
+            <div id="lottie-3" class="lottie-layer"></div>
+            <div id="lottie-4" class="lottie-layer"></div>
+            <div id="lottie-5" class="lottie-layer"></div>
+            <div id="lottie-6" class="lottie-layer"></div>
+            <div id="lottie-7" class="lottie-layer"></div>
+            <div id="lottie-8" class="lottie-layer"></div>
+            <div id="lottie-9" class="lottie-layer"></div>
+            <div id="lottie-10" class="lottie-layer"></div>
+            <div id="lottie-11" class="lottie-layer"></div>
+            <div id="lottie-12" class="lottie-layer"></div>
+            <div id="lottie-13" class="lottie-layer"></div>
+            <div id="lottie-14" class="lottie-layer"></div>
+            <div id="lottie-15" class="lottie-layer"></div>
+            <div id="lottie-16" class="lottie-layer"></div>
+            <div id="lottie-17" class="lottie-layer"></div>
+        </div>
+
+        <div id="controls-container" class="flex flex-col items-center mt-8 w-full max-w-md">
+            <div id="control-icons" class="flex justify-center items-center gap-5 mb-4">
+               <div id="upload-icon" class="control-icon" data-content="upload">
+                    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Upload.svg" alt="Upload Colors" class="w-8 h-8">
+                </div>
+                <div id="color-picker-icon" class="control-icon active" data-content="color">
+                    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/ColorPickerIcon.svg" alt="Color Picker" class="w-8 h-8">
+                </div>
+                <div id="download-icon" class="control-icon" data-content="download">
+                    <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Download.svg" alt="Download Colors" class="w-8 h-8">
+                </div>
+            </div>
+
+            <div class="w-full p-4 bg-white rounded-3xl">
+                <div id="color-content" class="content-section">
+                    <input type="color" id="color-picker-1" class="color-picker-input" value="#AB94AF" data-index="1">
+                    <input type="color" id="color-picker-2" class="color-picker-input" value="#587CA6" data-index="2">
+                    <input type="color" id="color-picker-3" class="color-picker-input" value="#CA9543" data-index="3">
+                    <input type="color" id="color-picker-4" class="color-picker-input" value="#D9E28D" data-index="4">
+                    <input type="color" id="color-picker-5" class="color-picker-input" value="#4CAFBD" data-index="5">
+                    <input type="color" id="color-picker-6" class="color-picker-input" value="#352287" data-index="6">
+                    <input type="color" id="color-picker-7" class="color-picker-input" value="#71A68D" data-index="7">
+                    <input type="color" id="color-picker-8" class="color-picker-input" value="#BC0000" data-index="8">
+                    <input type="color" id="color-picker-9" class="color-picker-input" value="#F3B40E" data-index="9">
+                    <input type="color" id="color-picker-10" class="color-picker-input" value="#f0f0f0" data-index="10">
+                </div>
+
+                <div id="upload-content" class="content-section hidden">
+                    <label for="upload-input" class="underline text-[#352287] cursor-pointer hover:text-opacity-80 transition-opacity duration-200">
+                        Upload Hex Codes (.txt) or Image
+                    </label>
+                    <input type="file" id="upload-input" accept=".txt, image/png, image/jpeg, image/gif, image/webp" class="hidden"/>
+
+                </div>
+
+                <div id="download-content" class="content-section hidden">
+                    <button id="download-button" class="underline text-[#352287] cursor-pointer hover:text-opacity-80 transition-opacity duration-200 bg-transparent">
+                        Download Hex Codes (.txt)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- References ---
+            const animationContainer = document.getElementById('lottie-container');
+            const numberOfAnimations = 17;
+            const animations = [];
+            const baseURL = 'https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/';
+            const colorPickers = document.querySelectorAll('.color-picker-input');
+            const bodyElement = document.body;
+            const controlIcons = document.querySelectorAll('.control-icon');
+            const contentSections = document.querySelectorAll('.content-section');
+            const uploadInput = document.getElementById('upload-input');
+            const uploadStatus = document.getElementById('upload-status'); // Get reference
+            const swatchPreview = document.getElementById('swatch-preview'); // Get reference
+            const downloadButton = document.getElementById('download-button');
+            const downloadStatus = document.getElementById('download-status'); // Get reference
+
+            // --- Initialize Color Thief ---
+            const colorThief = new ColorThief();
+
+            // --- Lottie Animation Setup ---
+            const colorPickerMap = {
+                'color-picker-1': [0, 9], 'color-picker-2': [1, 10], 'color-picker-3': [2, 11],
+                'color-picker-4': [3, 12], 'color-picker-5': [4, 13], 'color-picker-6': [5, 14],
+                'color-picker-7': [6, 15], 'color-picker-8': [7, 16], 'color-picker-9': [8],
+                'color-picker-10': []
+            };
+            const updateLottieColor = (pickerId, newColor) => {
+                const targetIndices = colorPickerMap[pickerId]; if (!targetIndices) return;
+                if (pickerId === 'color-picker-10') { bodyElement.style.backgroundColor = newColor; }
+                else { targetIndices.forEach(index => { const layerElement = document.getElementById(`lottie-${index + 1}`); if (layerElement) layerElement.style.color = newColor; }); }
+            };
+            setTimeout(() => { /* ... Lottie loading loop ... */
+                 for (let i = 1; i <= numberOfAnimations; i++) { const animationID = `lottie-${i}`; const container = document.getElementById(animationID); if (container) { const animationData = { container, renderer: 'svg', loop: true, autoplay: true, path: `${baseURL}${i}.json` }; try { const anim = lottie.loadAnimation(animationData); animations.push(anim); for (const pickerId in colorPickerMap) { if (colorPickerMap[pickerId].includes(i - 1)) { const initialColor = document.getElementById(pickerId)?.value; if (initialColor) container.style.color = initialColor; break; } } } catch (error) { console.error(`Error loading Lottie ${i}:`, error); animations.push(null); } } else { console.warn(`Container not found: lottie-${i}`); animations.push(null); } } const initialBgColor = document.getElementById('color-picker-10')?.value; if (initialBgColor) bodyElement.style.backgroundColor = initialBgColor;
+            }, 100);
+            colorPickers.forEach(picker => { picker.addEventListener('input', (event) => { updateLottieColor(event.target.id, event.target.value); }); });
+
+            // --- Control Toggling Logic ---
+            const showContent = (contentId) => {
+                contentSections.forEach(section => section.classList.add('hidden')); controlIcons.forEach(icon => icon.classList.remove('active'));
+                const sectionToShow = document.getElementById(`${contentId}-content`); if (sectionToShow) sectionToShow.classList.remove('hidden');
+                const iconToActivate = document.getElementById(`${contentId}-icon`); if (iconToActivate) iconToActivate.classList.add('active');
+            };
+            controlIcons.forEach(icon => { icon.addEventListener('click', () => { const contentTarget = icon.getAttribute('data-content'); if (contentTarget) showContent(contentTarget); }); });
+
+            // --- Helper Function: RGB to Hex ---
+            function rgbToHex(r, g, b) {
+                return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+            }
+
+            // --- File Upload Logic (Handles Text and Image) ---
+            uploadInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (uploadStatus) uploadStatus.textContent = ''; // Clear status
+                if (swatchPreview) swatchPreview.innerHTML = ''; // Clear preview
+
+                if (!file) return; // No file selected
+
+                // --- Handle Text File ---
+                if (file.type === 'text/plain') {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const text = e.target.result;
+                        const hexCodes = text.match(/#[0-9a-fA-F]{6}/g);
+                        if (!hexCodes || hexCodes.length === 0) {
+                            if (uploadStatus) uploadStatus.textContent = 'Error: No valid hex codes found.';
+                            uploadInput.value = ''; return;
+                        }
+                        hexCodes.slice(0, 10).forEach((hex, index) => {
+                            const picker = document.getElementById(`color-picker-${index + 1}`);
+                            if (picker) {
+                                picker.value = hex;
+                                picker.dispatchEvent(new Event('input', { bubbles: true }));
+                                // Add swatch to preview
+                                if (swatchPreview) {
+                                    const swatchDiv = document.createElement('div');
+                                    swatchDiv.className = 'swatch-color'; // Use class for styling
+                                    swatchDiv.style.backgroundColor = hex;
+                                    swatchDiv.title = hex;
+                                    swatchPreview.appendChild(swatchDiv);
+                                }
+                            }
+                        });
+                        if (uploadStatus) uploadStatus.textContent = `Loaded ${Math.min(hexCodes.length, 10)} colors from text.`;
+                        uploadInput.value = '';
+                    };
+                    reader.onerror = () => {
+                        if (uploadStatus) uploadStatus.textContent = 'Error reading text file.';
+                        uploadInput.value = '';
+                    };
+                    reader.readAsText(file);
+                }
+                // --- Handle Image File ---
+                else if (file.type.startsWith('image/')) {
+                    if (uploadStatus) uploadStatus.textContent = 'Processing image...';
+                    const img = new Image();
+                    let objectURL = null; // To store URL for revocation
+
+                    img.onload = () => {
+                        try {
+                            // Get palette (array of [r,g,b] arrays)
+                            const palette = colorThief.getPalette(img, 10); // Get 10 colors
+
+                            if (!palette || palette.length === 0) {
+                                throw new Error("Could not extract colors.");
+                            }
+
+                            // Clear preview before adding new ones
+                            if (swatchPreview) swatchPreview.innerHTML = '';
+
+                            // Apply colors
+                            palette.slice(0, 10).forEach((rgb, index) => {
+                                const hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
+                                const picker = document.getElementById(`color-picker-${index + 1}`);
+                                if (picker) {
+                                    picker.value = hex;
+                                    picker.dispatchEvent(new Event('input', { bubbles: true }));
+                                     // Add swatch to preview
+                                    if (swatchPreview) {
+                                        const swatchDiv = document.createElement('div');
+                                        swatchDiv.className = 'swatch-color';
+                                        swatchDiv.style.backgroundColor = hex;
+                                        swatchDiv.title = hex;
+                                        swatchPreview.appendChild(swatchDiv);
+                                    }
+                                }
+                            });
+
+                            if (uploadStatus) uploadStatus.textContent = `Extracted ${Math.min(palette.length, 10)} colors from image.`;
+
+                        } catch (error) {
+                            console.error("Color extraction error:", error);
+                            if (uploadStatus) uploadStatus.textContent = 'Error extracting colors.';
+                        } finally {
+                            // Clean up
+                            if (objectURL) URL.revokeObjectURL(objectURL);
+                            uploadInput.value = ''; // Clear file input
+                        }
+                    };
+
+                    img.onerror = () => {
+                        if (uploadStatus) uploadStatus.textContent = 'Error loading image file.';
+                        if (objectURL) URL.revokeObjectURL(objectURL);
+                        uploadInput.value = '';
+                    };
+
+                    // Load the image
+                    objectURL = URL.createObjectURL(file);
+                    img.src = objectURL;
+
+                }
+                // --- Handle Invalid File Type ---
+                else {
+                    if (uploadStatus) uploadStatus.textContent = 'Error: Invalid file type.';
+                    uploadInput.value = '';
+                }
+            });
+
+
+            // --- File Download Logic ---
+             downloadButton.addEventListener('click', () => {
+                if (downloadStatus) downloadStatus.textContent = '';
+                let hexContent = ''; colorPickers.forEach(picker => { hexContent += `${picker.value}\n`; }); hexContent = hexContent.trim();
+                if (!hexContent) { if (downloadStatus) downloadStatus.textContent = 'No colors to download.'; return; }
+                try { const blob = new Blob([hexContent], { type: 'text/plain;charset=utf-8' }); const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'flower_wheel_colors.txt'; link.style.display = 'none'; document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(link.href); if (downloadStatus) downloadStatus.textContent = 'Colors downloaded!'; setTimeout(() => { if (downloadStatus) downloadStatus.textContent = ''; }, 3000); }
+                catch (error) { console.error("Error during download:", error); if (downloadStatus) downloadStatus.textContent = 'Download failed. See console.'; }
+            });
+
+             // Initialize the view - Still wrapped in setTimeout
+             setTimeout(() => { showContent('color'); }, 0);
+
+        }); // End DOMContentLoaded
+    </script>
+</body>
+</html>
