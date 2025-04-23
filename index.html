@@ -39,7 +39,7 @@
 
 p {
   font-family: freight-sans-pro, Inter, sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 200;
   color: #192130;
 }
@@ -243,6 +243,72 @@ nav a:hover {
   padding-bottom: 50px;
 }
 
+
+
+/* Projektsidorna */
+
+/* Style for the new project detail section */
+#project-detail {
+  padding: 40px 20px; /* Adjust padding as needed */
+  background-color: #F2F1E9; /* Or choose another background */
+  /* margin-top: 20px; Optional margin */
+  /* display: none; Set inline for now, JS will manage */
+}
+
+.project-content {
+  max-width: 1000px; /* Max width for the content */
+  margin: 0 auto;   /* Center the content */
+  text-align: center; /* Center text elements */
+}
+
+.project-content img,
+.project-content video {
+  max-width: 100%; /* Ensure media is responsive */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.project-content h1 { /* Style for project title */
+   margin-bottom: 15px;
+   color: #BF4F36; /* Reuse your existing heading color */
+   font-size: 2.5rem; /* Adjust size */
+}
+
+.project-content p { /* Style for project description */
+  font-size: 1.2rem; /* Reuse your existing paragraph style */
+  text-align: lcenter; /* Or center, depending on preference */
+  margin-bottom: 40px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+/* Ensure gallery items are clickable */
+.gallery-item[data-project-id] {
+    cursor: pointer;
+}
+
+.toned-down-video {
+  /* Apply CSS filters here */
+  /* Start by trying saturation and brightness */
+  filter: saturate(70%) brightness(95%) hue-rotate(-10deg) contrast(110%);
+
+  /* --- Examples to Experiment With --- */  /* Just reduce saturation: */
+  /* filter: saturate(70%); */
+
+  /* Just reduce contrast: */
+  /* filter: contrast(85%); */
+
+  /* Combine multiple: */
+  /* filter: saturate(80%) contrast(90%) brightness(98%); */
+
+  /* (hue-rotate will change the yellow to another color, maybe not what you want) */
+ /* filter: hue-rotate(-5deg); */
+}
+
+
+
+
+
 .reel iframe {
   border: none;
   width: 100%; 
@@ -345,6 +411,14 @@ nav a:hover {
     width: 300px;
     height: 300px;
   }
+
+  .project-content p { /* Style for project description */
+  font-size: 1.2rem; /* Reuse your existing paragraph style */
+  text-align: center; /* Or center, depending on preference */
+  margin-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 }
 
 
@@ -372,116 +446,102 @@ nav a:hover {
 
 <section id="work" class="gallery">
   
-      <div class="gallery-item"><a href="https://www.youtube.com/watch?v=-SaekO2eC8Q" target="_blank">
+      <div class="gallery-item" data-project-id="home-alone" style="cursor: pointer;">
           <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_3.gif" alt="Dog">
         <span class="text-overlay">Home Alone</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
       <div class="gallery-item">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/summergirl.jpg" alt="Summer Girl">
         <span class="text-overlay">Illustrations</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
-<div class="gallery-item">
-    <a href="https://www.youtube.com/shorts/KX5QhMykByE" target="_blank">
+<div class="gallery-item" data-project-id="stranger-things" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings.gif" alt="Stranger Things">
         <span class="text-overlay">Stranger Things</span>
         <span class="overlay"></span>
-    </a>
 </div>
 
-      <div class="gallery-item">
-        <a href="https://www.youtube.com/watch?v=yjdCVlmt23w" target="_blank">
+      <div class="gallery-item" data-project-id="summer-solstice" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/SummerSolstice.gif" alt="Summer Solstice">
         <span class="text-overlay">Summer Solstice</span>
         <span class="overlay"></span>
-        </a>
       </div>
 
-          <div class="gallery-item"><a href="https://www.youtube.com/watch?v=QtntIanFpMc" target="_blank">
+          <div class="gallery-item" data-project-id="cnn" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/CNN.gif" alt="CNN">
-        <span class="text-overlay">Gifs</span>
+        <span class="text-overlay">CNN</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
-      <div class="gallery-item"><a href="https://www.youtube.com/shorts/sCGeCxiFA4E" target="_blank">
+      <div class="gallery-item" data-project-id="leaf-people" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/leaf2.gif" alt="Leaf People">
-        <span class="text-overlay">Gifs</span>
+        <span class="text-overlay">Leaf People</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
-      <div class="gallery-item"><a href="https://www.youtube.com/shorts/sCGeCxiFA4E" target="_blank">
+      <div class="gallery-item">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/preggo.gif" alt="Preggo Girl">
-        <span class="text-overlay">Gifs</span>
+        <span class="text-overlay">3D Modelling</span>
         <span class="overlay"></span>
-        </a>
       </div>
 
-        <div class="gallery-item"><a href="https://www.youtube.com/shorts/sCGeCxiFA4E" target="_blank">
+        <div class="gallery-item" data-project-id="loop" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Loop2.gif" alt="Loop">
-        <span class="text-overlay">Gifs</span>
+        <span class="text-overlay">Loop</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
-      <div class="gallery-item">
+      <div class="gallery-item" data-project-id="power-of-character" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/powerofcharacter.jpg" alt="Power of Character">
-        <span class="text-overlay">Illustrations</span>
+        <span class="text-overlay">The Power of Character</span>
         <span class="overlay"></span>
-        </a>
-      </div>
-  
-      <div class="gallery-item"><a href="https://www.youtube.com/shorts/sCGeCxiFA4E" target="_blank">
-        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/scarf.gif" alt="Scarf">
-        <span class="text-overlay">Gifs</span>
-        <span class="overlay"></span>
-        </a>
       </div>
   
       <div class="gallery-item">
-        <a href="https://vimeo.com/302221610" target="_blank">
+        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/scarf.gif" alt="Scarf">
+        <span class="text-overlay">Scarf</span>
+        <span class="overlay"></span>
+      </div>
+  
+      <div class="gallery-item" data-project-id="aeroplane" style="cursor: pointer;">
           <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Aeroplane_2.gif" alt="Aeroplane">
         <span class="text-overlay">Aeroplane</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
-      <div class="gallery-item"><a href="https://www.youtube.com/shorts/1b69kacCOjA" target="_blank">
+      <div class="gallery-item" data-project-id="riso-couple" style="cursor: pointer;">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/RisoCouple.gif" alt="Riso Couple">
         <span class="text-overlay">Riso Couple</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
-      <div class="gallery-item">
-        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/foxes5.jpg" alt="Tend">
-        <span class="text-overlay">Illustrations</span>
+      <div class="gallery-item" data-project-id="flower-wheel" style="cursor: pointer;">
+        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/FlowerWheel.gif" alt="Flower Wheel">
+        <span class="text-overlay">Flower Wheel</span>
         <span class="overlay"></span>
-        </a>
       </div>
 
         <div class="gallery-item">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/BloBCycle.gif" alt="BlobCycle">
-        <span class="text-overlay">Gifs</span>
+        <span class="text-overlay">Handdrawn Animation</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
       <div class="gallery-item">
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/fruitnveg.jpg" alt="Fruit & Veg">
           <span class="text-overlay">Illustrations</span>
         <span class="overlay"></span>
-        </a>
       </div>
   
       <!-- Add more images here -->
     </section>
+
+    <section id="project-detail" style="display: none;"> <div class="project-content">
+    </div>
+</section>
       
 <section id="reel" class="reel">
     <!-- SD Version from Google Drive -->
@@ -525,10 +585,10 @@ nav a:hover {
         <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/PenWalk.gif" alt="Alexandra Lund" class="bio-image">
         <div class="bio-text">
           <h1>A bit about me</h1>
-          <p>I started off as an intern at <b>Animade</b> in London where I continued working for a few years before moving back to Sweden.<br><br>
+          <p>I started off as an intern at <b>Animade</b> in London where I continued working for a few years before moving back to Sweden.<br>
             Since then I've been freelancing and have been lucky to work with more of my favourite studios such as <b>Buck</b>, <b>Nexus</b> and <b>Oddfellows</b>. Clients I've worked with include <b>Google</b>, <b>Apple</b>, <b>ACLU</b> and <b>CNN</b>.<br>
-            I enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Sweden.<br><br>
-            I do all kinds of 2D animation work and you can also hire me as a Designer, Illustrator or Animation Lead.<br><br>
+            I enjoy teaching and have been guest lecturing at Hyper Island and Berghs in Sweden.<br>
+            I do all kinds of 2D animation work and you can also hire me as a Designer, Illustrator or Animation Lead.<br>
             If you want to know more you can watch me animate some walk cycles at <a href="https://www.youtube.com/watch?v=Xnqg6F89TmA" target="_blank">Adobe Live</a>, or read an <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank">interview with WeTransfer</a> about my personal project Words and Pals.
           </p>
         </div>
@@ -536,31 +596,201 @@ nav a:hover {
     </section>
   </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const sdVideo = document.getElementById('sd-video');
-  const smallerVideo = document.getElementById('smaller-video');
-  const youtubeVideo = document.getElementById('youtube-video');
 
-  function showYouTubeFallback() {
-    sdVideo.style.display = 'none';
-    smallerVideo.style.display = 'none';
-    youtubeVideo.style.display = 'block';
-  }
+  // Wait for the DOM to be fully loaded ONCE for ALL scripts below
+  document.addEventListener('DOMContentLoaded', function() {
 
-  // Add error listeners to both primary video sources
-  [sdVideo, smallerVideo].forEach(video => {
-    video.addEventListener('error', function() {
-      // If one video source fails, try the next
-      if (video === sdVideo) {
-        sdVideo.style.display = 'none';
-        smallerVideo.style.display = 'block';
-      } else {
-        // If smaller video also fails, show YouTube
-        showYouTubeFallback();
+    // --- START: Project Detail Functionality ---
+    const projectData = {
+      'home-alone': {
+        title: 'Home Alone',
+        primaryMediaHtml: '<img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_3.gif" alt="Dog Animation">',
+        contentTextHtml: '<p>A short animation about a dog waiting for its owner. <br>This was part of a series of animations. Me and my friend Maria Stark started making loops together and called our side project Words and Pals. We used the same colours and words to see how we interpreted it in our own ways. The project was featured as wallpapers on WeTransfer, who also interviewed us for their ongoing series <a href="https://wepresent.wetransfer.com/stories/words-and-pals" target="_blank" rel="noopener noreferrer">WePresent</a>.</p>'
+
+      },
+      'stranger-things': {
+        primaryMediaHtml: `
+            <video controls loop muted autoplay playsinline width="100%">
+            <source src="https://github.com/alxlund/alxlund.github.io/raw/refs/heads/main/upside_down1080.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    `,
+    title: 'Stranger Things',
+    contentTextHtml: '<p>Made in excitement when the second season of Stranger Things was about to start, during my time at Animade. My task was to come up with some fun ideas, draw and animate. Ed Barrett was CD-ing the project and suggested to make it a lot darker, which I quite liked. Sound on!</p>'
+      },
+
+       'summer-solstice': {
+        primaryMediaHtml: `
+            <video controls loop muted autoplay playsinline width="100%">
+            <source src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/SummerSolstice.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    `,
+        title: 'Summer Solstice',
+        contentTextHtml: '<p>A short animation made during my time as an intern at Animade, celebrating the longest day of the year. <br>I came up with some ideas around the the summer solstice, which involved some research since we don`t really celebrate it in Sweden. In the end we just settled on the concept of a very short and wild party. <br>Tom Judd was Creative Directing and I illustrated and animated everything. I remember getting a lot of ideas from the whole team and it was a fun collaborative experience. Sound on!</p>'
+      },
+       'cnn': {
+        primaryMediaHtml: `
+          <div style="position: relative; padding-top: 56.25%; background-color: transparent; margin-bottom: 30px;">
+             <iframe
+               src="https://drive.google.com/file/d/1X6VEcLy09Mmx_iggqw-AJ5zc9-TwV3rB/preview"
+               style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+               allow="autoplay">
+             </iframe>
+          </div>
+        `,
+        title: 'Staying hydrated with CNN Parallells',
+        contentTextHtml: '<p>During my time at Animade I got to lead, design and animate this project about staying hydrated for CNN Health, with Creative Direction by Ed Barrett. <br>It was a fun project with a lot of design thinking. Every animation needed to visualise being both hydrated or dehydrated and relate to the different effects on the body. You can read more and see the animations at <a href="https://edition.cnn.com/interactive/health/parallels/water-wellness/" target="_blank" rel="noopener noreferrer">the CNN Health website</a>.</p>'
+        ,
+        secondaryMediaHtml: `
+            <video controls loop muted autoplay playsinline width="100%" class="toned-down-video">
+            <source src="https://github.com/alxlund/alxlund.github.io/raw/refs/heads/main/CognitiveFunction.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+                    <video controls loop muted autoplay playsinline width="100%" class="toned-down-video">
+            <source src="https://github.com/alxlund/alxlund.github.io/raw/refs/heads/main/BloodPressure.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <img src="https://github.com/alxlund/alxlund.github.io/blob/main/CNN_Sketches3.jpg?raw=true" alt="Sketch 1">
+    `
+      },
+      'leaf-people': {
+        title: 'Leaf People',
+        primaryMediaHtml: '<img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/leaf2.gif" alt="Leaf Person Gif">',
+        contentTextHtml: '<p>An autumnal animation exercise, made during down time at Animade. This idea came about on one of those windy and rainy London days.</p>'
+      },
+      'power-of-character': {
+        primaryMediaHtml: '<img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/powerofcharacter.jpg" alt="Power of Character Illustration">',
+        title: 'Power of Character',
+        contentTextHtml: '<p>What came out of a talk by Animade, titled ”The Power of Character”, turned into an article about how character can help create meaningful connections with your audience. <br>I illustrated these powerful people to help spread the message.</p>'
+      },
+       'loop': {
+        primaryMediaHtml: '<img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Loop2.gif" alt="Abstract Loop Gif">',
+        title: 'Loop',
+        contentTextHtml: '<p>I wanted to try out EbSynth for texturing and had this little loop I animated just for fun. <br>Personal projects is my favourite way of learning new things.</p>'
+      },
+      'aeroplane': {
+        title: 'Aeroplane',
+        primaryMediaHtml: `
+        <div style="padding:56.25% 0 0 0;position:relative;margin-bottom:30px;">
+          <iframe
+              src="https://player.vimeo.com/video/302221610?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;"
+              title="Aeroplane">
+          </iframe>
+        </div>
+    `, // <-- Only the div and iframe, NO script tag here
+        contentTextHtml: '<p>My first short film! A design experiment featuring a foreign species that accidentally gets released into a new environment. It ends up altering the fauna quite a bit! <br><br>Music by Simon Nilsson<br> Sound Design by Sounds Like These<br> Made at Animade</p>'
+      },
+      'flower-wheel': {
+        primaryMediaHtml: `
+            <video controls loop muted autoplay playsinline width="100%">
+            <source src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/FlowerWheel.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    `,
+    title: 'Flower Wheel',
+        contentTextHtml: '<p>I was curious to learn more javascript and enjoy vibe coding. This time I used Google Gemini to make this colour picker from my hand drawn flower animation.<br><a href="https://alexandralund.se/flowerwheel" target="_blank" rel="noopener noreferrer">Try changing the colours yourself!</a></p>'
+      },
+      'riso-couple': {
+        title: 'Riso Couple',
+        primaryMediaHtml: '<img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/RisoCouple.gif" alt="Riso Couple Animation">',
+        contentTextHtml: '<p>I love riso printing and wanted to make a short loop that was printed and scanned. <br>Of course we can make really great looking textures on a computer, but the real deal is just always that one step prettier in my opinion.</p>'
       }
-    });
-  });
-});
+      // Add entries for ALL your projects that have a data-project-id
+    };
+
+    const galleryItems = document.querySelectorAll('.gallery-item[data-project-id]');
+    const projectDetailSection = document.getElementById('project-detail');
+    const projectContentContainer = projectDetailSection.querySelector('.project-content');
+
+    if (galleryItems.length > 0 && projectDetailSection && projectContentContainer) { // Check if elements exist
+        galleryItems.forEach(item => {
+          item.addEventListener('click', function() {
+            const projectId = this.dataset.projectId;
+            const data = projectData[projectId];
+
+            if (data) {
+              projectContentContainer.innerHTML = `
+                ${data.primaryMediaHtml || ''}
+                <h1>${data.title}</h1>
+                ${data.contentTextHtml || ''}
+                ${data.secondaryMediaHtml || ''}
+              `;
+              projectDetailSection.style.display = 'block';
+              galleryItems.forEach(el => el.classList.remove('active'));
+              this.classList.add('active');
+              projectDetailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              console.warn(`No data found for project ID: ${projectId}`);
+              projectDetailSection.style.display = 'none';
+            }
+          });
+        });
+    } else {
+        console.warn('Project detail elements not found. Skipping project detail setup.');
+    }
+    // --- END: Project Detail Functionality ---
+
+
+    // --- START: Video Fallback Functionality ---
+    const sdVideo = document.getElementById('sd-video');
+    const smallerVideo = document.getElementById('smaller-video');
+    const youtubeVideo = document.getElementById('youtube-video');
+
+    function showYouTubeFallback() {
+      // Check if elements exist before trying to change style
+      if (sdVideo) sdVideo.style.display = 'none';
+      if (smallerVideo) smallerVideo.style.display = 'none';
+      if (youtubeVideo) youtubeVideo.style.display = 'block';
+    }
+
+    // Check if the video elements exist before adding listeners or checking state
+    if (sdVideo || smallerVideo || youtubeVideo) {
+        [sdVideo, smallerVideo].forEach(video => {
+           if (video) { // Double check element exists
+                // Using 'error' event might be more reliable than checking networkState onload
+                video.addEventListener('error', function() {
+                  console.log(video.id + ' failed to load, attempting fallback.');
+                  showYouTubeFallback();
+                });
+
+                // Optional: Add a check for iframes that might fail without an 'error' event
+                // This could happen with network issues or CORS problems loading the iframe src
+                video.addEventListener('load', function() {
+                    // A basic check: If the iframe loaded but its contentDocument is inaccessible (often due to cross-origin restrictions)
+                    // or doesn't seem to contain expected content, consider it an error. This is not foolproof.
+                    try {
+                        if (!video.contentDocument || video.contentDocument.body.innerHTML.trim() === '') {
+                           // console.log(video.id + ' seems empty after load, attempting fallback.');
+                           // showYouTubeFallback(); // Be cautious with this, might trigger unnecessarily
+                        }
+                    } catch (e) {
+                        // Accessing contentDocument might throw a security error for cross-origin iframes
+                        // If you expect this *not* to happen for your Google Drive links, it might indicate failure
+                        // console.log('Could not access contentDocument for ' + video.id + ', might be cross-origin issue or failure.');
+                        // Depending on behavior, you might trigger fallback here too.
+                    }
+                });
+           }
+        });
+
+       // Initial check in case a video is already broken/blocked when JS runs
+       if (sdVideo && sdVideo.networkState === 3 /* NETWORK_NO_SOURCE */ ) { // Using numeric value for broader compatibility
+           showYouTubeFallback();
+       } else if (smallerVideo && smallerVideo.networkState === 3 /* NETWORK_NO_SOURCE */) {
+            showYouTubeFallback();
+       }
+    } else {
+         console.warn('Video elements for fallback not found.');
+    }
+    // --- END: Video Fallback Functionality ---
+
+
+  }); // --- END: DOMContentLoaded ---
+
 </script>  
   
 </body>
