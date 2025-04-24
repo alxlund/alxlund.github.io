@@ -250,7 +250,7 @@ nav a:hover {
 
 .project-content p { /* Style for project description */
   font-size: 1.2rem; /* Reuse your existing paragraph style */
-  text-align: lcenter; /* Or center, depending on preference */
+  text-align: center; /* Or center, depending on preference */
   margin-bottom: 40px;
   padding-left: 100px;
   padding-right: 100px;
