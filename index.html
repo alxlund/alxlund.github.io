@@ -15,415 +15,7 @@
   <link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css">
 
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo2.gif" sizes="16x16">
-
-  <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Google Fonts */
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Mulish:wght@200;300;400;500;600;700&" rel="stylesheet">
-
-/* Adobe fonts */
-<link rel="stylesheet" href="https://use.typekit.net/ven0pmb.css");
-
-
-/* För hela layouten */
-.container {
-  margin: 0 auto;
-}
-
-p {
-  font-family: freight-sans-pro, Inter, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 200;
-  color: #192130;
-}
-
-b {
-  font-weight: 600;
-}
-
-h2 {
-  font-family: freight-sans-pro, Inter, sans-serif;
-  font-size: 1.3rem;
-  font-weight: 200;
-  color: #192130;
-}
-
-h1 {
-  font-family: freight-display-pro, serif;
-  font-weight: 700;
-  font-size: 2.5rem;
-  color: #BF4F36;
-  line-height: 3.5rem;
-}
-
-p a,
-h2 a {
-  color: #193073;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-p a:hover,
-h2 a:hover {
-  color: #BF4F36;
-}
-
-/* Navigationen */
-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #E7DFD1;
-  padding: 10px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  font-family: freight-sans-pro, Inter, sans-serif;
-  text-transform: uppercase;
-}
-
-nav a {
-  text-decoration: none;
-  color: #193073;
-  margin: 0 15px;
-  font-weight: bold;
-}
-
-nav a:hover {
-  color: #BF4F36;
-}
-
-.intro {
-  text-align: center;
-  background-color: #F2F1E9;
-  padding-bottom: 90px;
-  padding-top: 20px;
-  padding-left: 40px;
-  padding-right: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logo-animation {
-  align-items: center;
-}
-
-.right-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.intro-text {
-  text-align: center;
-  max-width: 600px;
-}
-
-
-/* CSS för galleriet */
-.gallery {
-  column-count: 3;
-  --webkit-column-count: 3;
-  --moz-column-count: 3;
-  gap: 1rem; /* Controls space between items horizontally */
-  padding: 1rem;
-}
-
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 1rem; /* Adds vertical space between rows */
-}
-
-.gallery-item img,
-.gallery-item video {
-  height: auto;
-  width: 100%;
-  display: block; /* Removes any extra whitespace */
-  transition: opacity 0.3s ease;
-}
-
-/* New overlay for solid color on hover */
-.gallery-item::after {
-  content: ""; /* Empty content for the overlay */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #D9B573; /* Solid color */
-  opacity: 0; /* Hidden by default */
-  transition: opacity 0.3s ease; /* Smooth transition */
-}
-
-/* Show overlay on hover */
-.gallery-item:hover::after {
-  opacity: 1; /* Fully visible on hover */
-}
-
-/* Text overlay styling for the main caption */
-.gallery-item::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the text */
-  color: #BF4F36;
-  font-family: freight-display-pro, serif;
-  font-size: 3rem; /* Increased font size for visibility */
-  font-weight: 700;
-  text-align: center;
-  opacity: 0; /* Hidden by default */
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* Ensure pointer events do not interfere with hover */
-  z-index: 1; /* Set z-index to bring text above the color overlay */
-}
-
-.gallery-item:hover::before {
-  opacity: 1; /* Fully visible on hover */
-}
-
-/* Overlay for solid color on hover */
-.overlay {
-    content: ""; /* Empty content for the overlay */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #D9B573; /* Solid color */
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Smooth transition */
-    z-index: 1; /* Ensure it is behind the text */
-}
-
-/* Show the solid color overlay on hover */
-.gallery-item a:hover .overlay {
-    opacity: 1; /* Fully visible on hover */
-}
-
-/* Text overlay styling */
-.text-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center the text */
-    color: #BF4F36; /* Text color */
-    font-family: freight-display-pro, serif; /* Update with your font */
-    font-size: 3rem; /* Adjust font size as needed */
-    font-weight: 700; /* Bold text */
-    text-align: center;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease;
-    z-index: 2; /* Ensure it appears above the background */
-}
-
-/* Show text overlay on hover */
-.gallery-item:hover .text-overlay {
-    opacity: 1; /* Fully visible on hover */
-}
-
-.reel {
-  display: flex;
-  gap: 20px;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #E7DFD1;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-
-
-/* Projektsidorna */
-
-/* Style for the new project detail section */
-#project-detail {
-  padding: 40px 20px; /* Adjust padding as needed */
-  background-color: #F2F1E9; /* Or choose another background */
-  /* margin-top: 20px; Optional margin */
-  /* display: none; Set inline for now, JS will manage */
-}
-
-.project-content {
-  max-width: 1000px; /* Max width for the content */
-  margin: 0 auto;   /* Center the content */
-  text-align: center; /* Center text elements */
-}
-
-.project-content img,
-.project-content video {
-  max-width: 100%; /* Ensure media is responsive */
-  height: auto;
-  margin-bottom: 20px;
-}
-
-.project-content h1 { /* Style for project title */
-   margin-bottom: 15px;
-   color: #BF4F36; /* Reuse your existing heading color */
-   font-size: 2.5rem; /* Adjust size */
-}
-
-.project-content p { /* Style for project description */
-  font-size: 1.2rem; /* Reuse your existing paragraph style */
-  text-align: lcenter; /* Or center, depending on preference */
-  margin-bottom: 40px;
-  padding-left: 100px;
-  padding-right: 100px;
-}
-
-/* Ensure gallery items are clickable */
-.gallery-item[data-project-id] {
-    cursor: pointer;
-}
-
-.toned-down-video {
-  /* Apply CSS filters here */
-  /* Start by trying saturation and brightness */
-  filter: saturate(70%) brightness(95%) hue-rotate(-10deg) contrast(110%);
-
-  /* --- Examples to Experiment With --- */  /* Just reduce saturation: */
-  /* filter: saturate(70%); */
-
-  /* Just reduce contrast: */
-  /* filter: contrast(85%); */
-
-  /* Combine multiple: */
-  /* filter: saturate(80%) contrast(90%) brightness(98%); */
-
-  /* (hue-rotate will change the yellow to another color, maybe not what you want) */
- /* filter: hue-rotate(-5deg); */
-}
-
-
-
-
-
-.reel iframe {
-  border: none;
-  width: 100%; 
-  max-width: 1000px;
-  aspect-ratio: 16/9;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Specific max-width for SD video */
-#sd-video {
-  max-width: 1280px;
-}
-
-/* Hide YouTube video by default */
-#youtube-video {
-  display: none;
-}
-
-/* Hide the smaller video by default on larger screens */
-#smaller-video {
-  display: none;
-}
-
-.contact {
-  display: flex;
-  gap: 20px;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #F2F1E9;
-  padding: 50px;
-}
-
-/* För biosektionen */
-.bio {
-  display: flex;
-  gap: 0px;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: center;
-  background-color: #E7DFD1;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.bio-content {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.bio img {
-  width: 400px;
-  height: 400px;
-}
-
-.bio-text {
-  max-width: 500px;
-}
-
-/* Responsive-ness for different screen-sizes */
-@media screen and (max-width: 768px) {
-  .gallery {
-    column-count: 1;
-    --webkit-column-count: 1;
-    --moz-column-count: 1;
-  }
-
-  #sd-video {
-    display: none;
-  }
-  
-  #smaller-video {
-    display: block;
-  }
-  
-  .bio {
-    padding-top: 0px;
-    padding-bottom: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-
-  .bio-content {
-    flex-direction: column; /* Lägg texten under bilden */
-    align-items: center; /* Centrera texten och bilden */
-    text-align: center; /* Justera textcentrering */
-  }
-
-  .bio-text {
-    text-align: center; /* Centrera texten på mindre skärmar */
-    max-width: 100%; /* Låt texten ta full bredd */
-  }
-  
-  .bio img {
-    width: 300px;
-    height: 300px;
-  }
-
-  .project-content p { /* Style for project description */
-  font-size: 1.2rem; /* Reuse your existing paragraph style */
-  text-align: center; /* Or center, depending on preference */
-  margin-bottom: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-}
-
-
-
-</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Navigation -->
@@ -447,7 +39,7 @@ nav a:hover {
 <section id="work" class="gallery">
   
       <div class="gallery-item" data-project-id="home-alone" style="cursor: pointer;">
-          <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_3.gif" alt="Dog">
+          <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/dog_4.gif" alt="Dog">
         <span class="text-overlay">Home Alone</span>
         <span class="overlay"></span>
       </div>
@@ -459,13 +51,13 @@ nav a:hover {
       </div>
   
 <div class="gallery-item" data-project-id="stranger-things" style="cursor: pointer;">
-        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings.gif" alt="Stranger Things">
+        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/strangerthings3.gif" alt="Stranger Things">
         <span class="text-overlay">Stranger Things</span>
         <span class="overlay"></span>
 </div>
 
       <div class="gallery-item" data-project-id="summer-solstice" style="cursor: pointer;">
-        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/SummerSolstice.gif" alt="Summer Solstice">
+        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/SummerSolstice2.gif" alt="Summer Solstice">
         <span class="text-overlay">Summer Solstice</span>
         <span class="overlay"></span>
       </div>
@@ -477,7 +69,7 @@ nav a:hover {
       </div>
   
       <div class="gallery-item" data-project-id="leaf-people" style="cursor: pointer;">
-        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/leaf2.gif" alt="Leaf People">
+        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/leaf3.gif" alt="Leaf People">
         <span class="text-overlay">Leaf People</span>
         <span class="overlay"></span>
       </div>
@@ -489,7 +81,7 @@ nav a:hover {
       </div>
 
         <div class="gallery-item" data-project-id="loop" style="cursor: pointer;">
-        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Loop2.gif" alt="Loop">
+        <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/Loop3.gif" alt="Loop">
         <span class="text-overlay">Loop</span>
         <span class="overlay"></span>
       </div>
