@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rive Animation Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rive Animation Test</title>
 
-    <style>
-        /* Basic styling to center the canvas and see its bounds */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        canvas {
-            border: 1px solid #ccc;
-            background-color: #fff;
-        }
-    </style>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      background-color: #fff;
+    }
+  </style>
 </head>
 <body>
-
-    <canvas id="riveCanvas" width="500" height="500"></canvas>
-
-    <script>
-        // Dynamiskt ladda Rive först
-        const script = document.createElement("script");
-        script.src = "https://unpkg.com/@rive-app/canvas@latest";
-        script.onload = () => {
-            const canvasElement = document.getElementById('riveCanvas');
-
-            const riveInstance = new Rive({
-                src: 'eyesfollowmouse.riv',
-                canvas: canvasElement,
-                autoplay: true,
-                stateMachines: 'State Machine 1',
-                onLoad: () => {
-                    console.log("Rive file loaded successfully!");
-                    riveInstance.resizeDrawingSurfaceToCanvas();
-                },
-                onLoadError: (error) => {
-                    console.error("Error loading Rive file:", error);
-                },
-            });
-        };
-        document.head.appendChild(script);
-    </script>
-
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script src="https://unpkg.com/@rive-app/canvas"></script>
+  <script>
+    const r = new rive.Rive({
+        src: "eyesfollowmouse.riv",
+        // OR the path to a discoverable and public Rive asset
+        // src: '/public/example.riv',
+        canvas: document.getElementById("canvas"),
+        autoplay: true,
+        // artboard: "Arboard", // Optional. If not supplied the default is selected
+        stateMachines: "State Machine 1",
+        onLoad: () => {
+          r.resizeDrawingSurfaceToCanvas();
+        },
+    });
+</script>
 </body>
 </html>
