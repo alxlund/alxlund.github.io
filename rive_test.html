@@ -36,43 +36,18 @@
 
         // Create a new Rive instance
         const riveInstance = new Rive({
-            // === IMPORTANT: Replace with the path to YOUR .riv file ===
-            // It should be in the same folder as this HTML file if using a relative path like this.
-            src: 'eyesfollowmouse.riv',
-            // === === === === === === === === === === === === === === ===
-
-            // Specify the canvas element to render to
-            canvas: canvasElement,
-
-            // Set autoplay to true to start the animation automatically
-            autoplay: true,
-
-            // Optional: Specify the artboard name if your .riv file has multiple
-            // artboard: 'YourArtboardName',
-
-            // Optional: Specify the animation name(s) to play
-            // animations: 'YourAnimationName', // Or ['Animation1', 'Animation2']
-
-            // Optional: Add basic event listeners
-            onLoad: () => {
-                console.log("Rive file loaded successfully!");
-                // Optional: Resize drawing surface to match canvas CSS/attribute size
-                // Useful if you size the canvas with CSS instead of width/height attributes
-                riveInstance.resizeDrawingSurfaceToCanvas();
-            },
-            onLoadError: (error) => {
-                console.error("Error loading Rive file:", error);
-            },
-             onPlay: (event) => {
-                console.log("Animation playing:", event.data);
-             }
-             // You can add other event listeners like onPause, onStop, onLoop etc.
-        });
-
-        // Ensure layout fits the canvas sizing if using CSS for size
-        // window.addEventListener('resize', () => {
-        //    riveInstance.resizeDrawingSurfaceToCanvas();
-        // });
+    src: 'eyesfollowmouse.riv',
+    canvas: canvasElement,
+    autoplay: true,
+    stateMachines: 'State Machine 1',
+    onLoad: () => {
+        console.log("Rive file loaded successfully!");
+        riveInstance.resizeDrawingSurfaceToCanvas();
+    },
+    onLoadError: (error) => {
+        console.error("Error loading Rive file:", error);
+    },
+});
 
     </script>
 
