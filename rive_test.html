@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rive Animation Test</title>
+
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+
+    <style>
+        /* Basic styling to center the canvas and see its bounds */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Light grey background */
+        }
+        canvas {
+            border: 1px solid #ccc; /* Add a border to see the canvas area */
+            background-color: #fff; /* White background for the canvas */
+            /* You can adjust width/height here or in the canvas tag */
+            /* width: 600px; */
+            /* height: 600px; */
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="riveCanvas" width="500" height="500"></canvas>
+
+    <script>
+        // Get the canvas element
+        const canvasElement = document.getElementById('riveCanvas');
+
+        // Create a new Rive instance
+        const riveInstance = new Rive({
+            // === IMPORTANT: Replace with the path to YOUR .riv file ===
+            // It should be in the same folder as this HTML file if using a relative path like this.
+            src: 'eyesfollowmouse.riv',
+            // === === === === === === === === === === === === === === ===
+
+            // Specify the canvas element to render to
+            canvas: canvasElement,
+
+            // Set autoplay to true to start the animation automatically
+            autoplay: true,
+
+            // Optional: Specify the artboard name if your .riv file has multiple
+            // artboard: 'YourArtboardName',
+
+            // Optional: Specify the animation name(s) to play
+            // animations: 'YourAnimationName', // Or ['Animation1', 'Animation2']
+
+            // Optional: Add basic event listeners
+            onLoad: () => {
+                console.log("Rive file loaded successfully!");
+                // Optional: Resize drawing surface to match canvas CSS/attribute size
+                // Useful if you size the canvas with CSS instead of width/height attributes
+                riveInstance.resizeDrawingSurfaceToCanvas();
+            },
+            onLoadError: (error) => {
+                console.error("Error loading Rive file:", error);
+            },
+             onPlay: (event) => {
+                console.log("Animation playing:", event.data);
+             }
+             // You can add other event listeners like onPause, onStop, onLoop etc.
+        });
+
+        // Ensure layout fits the canvas sizing if using CSS for size
+        // window.addEventListener('resize', () => {
+        //    riveInstance.resizeDrawingSurfaceToCanvas();
+        // });
+
+    </script>
+
+</body>
+</html>
