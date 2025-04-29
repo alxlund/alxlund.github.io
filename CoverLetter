@@ -1,0 +1,25 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Letter</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="cv">
+      <div class="logo-animation">
+   <img src="https://raw.githubusercontent.com/alxlund/alxlund.github.io/refs/heads/main/logo2.gif" alt="Logo">
+  </div>
+        <h2>Cover Letter</h2>
+      <p><a href="https://alexandralund.se">alexandralund.se</a></br><a href="mailto:alexandra.nilsson.lund@gmail.com">alexandra.nilsson.lund@gmail.com</a></br> 079-341 55 47</br><a href="https://www.instagram.com/alx.lund"><i class="fa fa-instagram"></i></a>
+<a href="https://www.linkedin.com/in/alexandra-lund-17620229/"><i class="fa fa-linkedin"></i></a>
+<a href="https://www.youtube.com/@AlxLund"><i class="fa fa-youtube"></i></a>
+
+        <section class="cv-section">
+            <h3>Hello!</h3><br><p>I think I'd be a great fit for the role of Product Marketing Communicator. I recently moved to Jönköping and would love to get the chance to work for a local company. Husqvarna seems like an employer I would really enjoy working for.<br><br>I have 10+ years of experience within the design industry, the last couple of years with a focus on motion design. As a communicator I believe I could contribute with both visual and verbal skills. While my focus has been on visual design I've always had a knack for language (scoring 1.9 on the verbal part of Högskoleprovet as an example) and distilling a message down to the important parts.<br><br>After studying Communication Design in Australia and working full-time in London, I feel very comfortable communicating in English in a professional environment. <br><br>I think my technical skills could also come in handy. I've learned so many new tools and software, and have actually come to enjoy it. It has made me faster at learning and I have a good overview of how systems usually work, which can be applied to tools such as PDM or DAM systems.<br><br>I have strong attention to detail and have worked with proofreading before. I've led complex projects in the past with 20+ deliverables and feel I've gotten quite good at keeping organised. My past experience working with photography could be a bonus as well.<br><br>I'd love to chat more if you also feel we could work well together!<br><br>Many thanks,<br>Alexandra Lund<br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </section>
+    </main>
+</body>
